@@ -6,6 +6,7 @@ public class Usuario {
 
     String username;
     String contraseña;
+    String email;
     int idUsuario;
     int monedas;
 
@@ -17,9 +18,10 @@ public class Usuario {
     }
 
 
-    public Usuario(String username, String contraseña) {
+    public Usuario(String username, String contraseña, String email) {
         this.username = username;
         this.contraseña = contraseña;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -37,6 +39,10 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public int getIdUsuario() {
         return idUsuario;

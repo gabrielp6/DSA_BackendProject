@@ -2,9 +2,7 @@ package edu.upc.dsa;
 
 import edu.upc.dsa.models.Usuario;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -18,8 +16,9 @@ public class GameManagerImpl implements GameManager{
 
     public static GameManagerImpl getInstance()
     {
-        if (implementation==null)
+        if (implementation==null){
             implementation = new GameManagerImpl();
+        }
 
         return implementation;
     }
@@ -31,27 +30,39 @@ public class GameManagerImpl implements GameManager{
     }
 
     public GameManagerImpl() {
-        this.listaUsuariosHM = new HashMap<String, Usuario>();
+        this.listaUsuariosHM = new HashMap<>();
         this.listaUsuarios = new LinkedList<>();
     }
 
     @Override
-    public void registrar(String username, String contraseña) {
-        Usuario usuario = new Usuario(username, contraseña);
+    public void registrar(String username, String contraseña, String email) {
+        Usuario usuario = new Usuario(username, contraseña, email);
 
         listaUsuariosHM.put(username, usuario);
 
         int idAsignado = listaUsuariosHM.size();
         usuario.setIdUsuario(idAsignado);
 
-        logger.info("usuario añadido:" + username);
+        logger.info("Usuario añadido:" + username);
+    }
+
+    @Override
+    public boolean logIn(String username, String password) {
+        Usuario user = listaUsuariosHM.get(username);
+        try {
+            if (user.getUsername().equals(username) && user.getContraseña().equals(password)){
+                return true;
+            }
+        } catch (NullPointerException nullPointerException) {
+            return false;
+        }
+        return false;
     }
 
     @Override
     public int usuariosSize() {
         return listaUsuariosHM.size();
     }
-
 
     @Override
     public Usuario getUser(String username) {
@@ -64,5 +75,19 @@ public class GameManagerImpl implements GameManager{
         }
         logger.info("Usuario "+ username +" no existe");
         return null;
+    }
+
+    @Override
+    public List<Usuario> getSortedUsersList() {
+        List<Usuario> _userList = new ArrayList<>(this.listaUsuariosHM.values());
+        if (!listaUsuariosHM.isEmpty()) {
+            Collections.sort(_userList, new Comparator<Usuario>() {
+                @Override
+                public int compare(Usuario o1, Usuario o2) {
+                    return o1.getUsername().compareTo(o2.getUsername());
+                }
+            });
+        }
+        return _userList;
     }
 }
