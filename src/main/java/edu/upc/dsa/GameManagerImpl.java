@@ -49,7 +49,7 @@ public class GameManagerImpl implements GameManager {
     public boolean logIn(String username, String password) {
         Usuario user = listaUsuariosHM.get(username);
         try {
-            if (user.getUsername().equals(username) && user.getContraseña().equals(password)) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 return true;
             }
         } catch (NullPointerException nullPointerException) {

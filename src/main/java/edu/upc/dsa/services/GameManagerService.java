@@ -4,14 +4,11 @@ import edu.upc.dsa.models.Usuario;
 
 import io.swagger.annotations.*;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @Api(value = "/game", description = "Endpoint to Game Service")
@@ -43,8 +40,8 @@ public class GameManagerService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response nuevoUsuario(Usuario usuario) {
 
-        if (usuario.getUsername()==null || usuario.getEmail()==null || usuario.getContraseña()==null)  return Response.status(500).entity(usuario).build();
-        gm.registrar(usuario.getUsername(), usuario.getContraseña(), usuario.getEmail());
+        if (usuario.getUsername()==null || usuario.getEmail()==null || usuario.getPassword()==null)  return Response.status(500).entity(usuario).build();
+        gm.registrar(usuario.getUsername(), usuario.getPassword(), usuario.getEmail());
         return Response.status(201).entity(usuario).build();
 
     }
@@ -73,7 +70,7 @@ public class GameManagerService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response iniciarSesion(Usuario user) {
 
-            if (gm.logIn(user.getUsername(), user.getContraseña())) return Response.status(201).build();
+            if (gm.logIn(user.getUsername(), user.getPassword())) return Response.status(201).build();
 
             else return Response.status(404).build();
     }

@@ -5,7 +5,7 @@ import java.util.List;
 public class Usuario {
 
     String username;
-    String contraseña;
+    String password;
     String email;
     int idUsuario;
     int monedas;
@@ -18,9 +18,9 @@ public class Usuario {
     }
 
 
-    public Usuario(String username, String contraseña, String email) {
+    public Usuario(String username, String password, String email) {
         this.username = username;
-        this.contraseña = contraseña;
+        this.password = password;
         this.email = email;
     }
 
@@ -32,12 +32,12 @@ public class Usuario {
         this.username = username;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() { return email; }
@@ -66,5 +66,18 @@ public class Usuario {
 
     public void setListaObjetos(List<Objeto> listaObjetos) {
         this.listaObjetos = listaObjetos;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "username='" + username + '\'' +
+                ", contraseña='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", idUsuario=" + idUsuario +
+                ", monedas=" + monedas +
+                ", listaObjetos=" + listaObjetos +
+                ", listaPartidas=" + listaPartidas +
+                '}';
     }
 }
