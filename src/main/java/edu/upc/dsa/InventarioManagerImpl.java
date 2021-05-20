@@ -3,6 +3,7 @@ package edu.upc.dsa;
 import edu.upc.dsa.models.Objeto;
 import edu.upc.dsa.models.Usuario;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -11,6 +12,13 @@ public class InventarioManagerImpl implements InventarioManager{
     private static GameManager gameManager;
     private static InventarioManager implementation;
     static final Logger logger = Logger.getLogger(GameManagerImpl.class.getName());
+    protected List<Objeto> objetos;
+
+    public InventarioManagerImpl(){
+
+        this.objetos = new LinkedList<>();
+
+    }
 
     public static InventarioManager getInstance()
     {
@@ -53,5 +61,10 @@ public class InventarioManagerImpl implements InventarioManager{
     @Override
     public List<Objeto> mostrarObjetosUsuario(Usuario usuario) {
         return usuario.getListaObjetos();
+    }
+
+    @Override
+    public List<Objeto> mostrarTodosObjetos() {
+        return this.objetos;
     }
 }

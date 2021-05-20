@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-@Api(value = "/game", description = "Endpoint to Game Service")
-@Path("/game")
+@Api(value = "/user", description = "no")
+@Path("/user")
 
-public class GameManagerService {
+public class UserService {
 
     private final GameManagerImpl gm;
 
-    public GameManagerService() {
+    public UserService() {
         this.gm = GameManagerImpl.getInstance();
         if (gm.usuariosSize() == 0) {
             gm.registrar("toni11", "hola", "toni11@hotmail.com");
@@ -31,23 +31,6 @@ public class GameManagerService {
     }
 
 
-    @POST /* Añadimos un nuev usuario */
-    @ApiOperation(value = "añadimos usuario a la lista", notes = "No notes")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Usuario.class),
-            @ApiResponse(code = 500, message = "Validation Error")
-
-    })
-
-    @Path("/addUsuario")///addUsuario/{username}/{contraseña}/{email}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response nuevoUsuario(Usuario usuario) {
-
-        if (usuario.getUsername()==null || usuario.getEmail()==null || usuario.getContraseña()==null)  return Response.status(500).entity(usuario).build();
-        gm.registrar(usuario.getUsername(), usuario.getContraseña(), usuario.getEmail());
-        return Response.status(201).entity(usuario).build();
-
-    }
 
     @GET // Obtener lista de usuarios registrados ordenados alfabeticamente
     @ApiOperation(value = "Lista de usuarios", notes = "Lista de usuarios ordenados alfabeticamente")
@@ -63,19 +46,33 @@ public class GameManagerService {
     }
 
 
-    @POST // Comprobar autenticación
-    @ApiOperation(value = "Autenticacion", notes = "Autenticacion")
+    @DELETE //Borrar usuario
+    @ApiOperation(value = "Borrar Usuario", notes = "No")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response= Usuario.class),
-            @ApiResponse(code = 404, message = "User not found")
+            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 404, message = "Not Found")
     })
-    @Path("/iniciarSesion")
+    @Path("/borrarUsuario")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response iniciarSesion(Usuario user) {
+    public Response borrarUsuario(Usuario user) {
 
-            if (gm.logIn(user.getUsername(), user.getContraseña())) return Response.status(201).build();
-
-            else return Response.status(404).build();
+        int usuario = this.gm.borrarUsuario(user.getUsername());
+        if(usuario == 0) return Response.status(404).build();
+        return Response.status(201).build();
     }
 
+
+    @GET //obtener un usuario
+    @ApiOperation(value = "obtener usuario", notes = "No")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successful", response = Usuario.class),
+            @ApiResponse(code = 404, message = "User not found")
+    })
+    @Path("/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUsuario(@PathParam("username") String username) {
+        Usuario u = this.gm.getUser(username);
+        if (u == null) return Response.status(404).build();
+        else  return Response.status(201).entity(u).build();
+    }
 }

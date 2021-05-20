@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 
-public class GameManagerImpl implements GameManager{
+public class GameManagerImpl implements GameManager {
 
     public HashMap<String, Usuario> listaUsuariosHM;
     public List<Usuario> listaUsuarios;
@@ -14,16 +14,15 @@ public class GameManagerImpl implements GameManager{
     private static GameManagerImpl implementation;
     static final Logger logger = Logger.getLogger(GameManagerImpl.class.getName());
 
-    public static GameManagerImpl getInstance()
-    {
-        if (implementation==null){
+    public static GameManagerImpl getInstance() {
+        if (implementation == null) {
             implementation = new GameManagerImpl();
         }
 
         return implementation;
     }
 
-    public static void delete(){
+    public static void delete() {
         implementation = null;
         logger.info("Instancia game manager borrada");
 
@@ -50,7 +49,7 @@ public class GameManagerImpl implements GameManager{
     public boolean logIn(String username, String password) {
         Usuario user = listaUsuariosHM.get(username);
         try {
-            if (user.getUsername().equals(username) && user.getContraseña().equals(password)){
+            if (user.getUsername().equals(username) && user.getContraseña().equals(password)) {
                 return true;
             }
         } catch (NullPointerException nullPointerException) {
@@ -66,14 +65,14 @@ public class GameManagerImpl implements GameManager{
 
     @Override
     public Usuario getUser(String username) {
-        for (Usuario usuario: this.listaUsuarios){
+        for (Usuario usuario : this.listaUsuarios) {
             String nombre = usuario.getUsername();
             if (username.equals(nombre)) {
-                logger.info("Usuario "+ username +" encontrado");
+                logger.info("Usuario " + username + " encontrado");
                 return usuario;
             }
         }
-        logger.info("Usuario "+ username +" no existe");
+        logger.info("Usuario " + username + " no existe");
         return null;
     }
 
@@ -89,5 +88,17 @@ public class GameManagerImpl implements GameManager{
             });
         }
         return _userList;
+    }
+
+    @Override
+    public int borrarUsuario(String username) {
+        int encontrado = 0;
+
+        for (Usuario usuario : this.listaUsuarios) {
+            if (usuario.getUsername().equals(username))
+                encontrado = 1;
+        }
+        
+        return encontrado;
     }
 }

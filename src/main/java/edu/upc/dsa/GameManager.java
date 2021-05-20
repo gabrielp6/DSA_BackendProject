@@ -12,8 +12,11 @@ public interface GameManager {
 
     public Usuario getUser(String username);
 
+    List<Usuario> getSortedUsersList();
+
+    public int borrarUsuario(String username);
+
     //Funciones para testear:
     public int usuariosSize();
 
-    List<Usuario> getSortedUsersList();
 }

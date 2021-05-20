@@ -9,6 +9,6 @@ public interface InventarioManager {
 
     public boolean Comprar(Objeto o);
     public List<Objeto> mostrarObjetosUsuario(Usuario usuario);
-
+    public List<Objeto> mostrarTodosObjetos();
 
 }
