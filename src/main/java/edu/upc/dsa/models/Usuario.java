@@ -67,17 +67,4 @@ public class Usuario {
     public void setListaObjetos(List<Objeto> listaObjetos) {
         this.listaObjetos = listaObjetos;
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "username='" + username + '\'' +
-                ", contraseña='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", idUsuario=" + idUsuario +
-                ", monedas=" + monedas +
-                ", listaObjetos=" + listaObjetos +
-                ", listaPartidas=" + listaPartidas +
-                '}';
-    }
 }

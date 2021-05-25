@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 
 
 @Api(value = "/auth", description = "no")
-@Path("")
+@Path("/auth")
 
 public class AuthenticationService {
 
@@ -34,11 +34,10 @@ public class AuthenticationService {
 
     })
 
-    @Path("/auth/registrarUsuario")///addUsuario/{username}/{contraseña}/{email}")
+    @Path("/registrarUsuario")///addUsuario/{username}/{contraseña}/{email}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registrarUsuario(Usuario usuario) {
 
-        System.out.println("Usuario:" + usuario);
         if (usuario.getUsername()==null || usuario.getEmail()==null || usuario.getPassword()==null)  return Response.status(500).entity(usuario).build();
         gm.registrar(usuario.getUsername(), usuario.getPassword(), usuario.getEmail());
         return Response.status(201).entity(usuario).build();
@@ -50,16 +49,13 @@ public class AuthenticationService {
     @ApiOperation(value = "Autenticacion", notes = "Autenticacion")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response= Usuario.class),
-            @ApiResponse(code = 404, message = "User2 not found")
+            @ApiResponse(code = 404, message = "User not found")
     })
-    @Path("/auth/iniciarSesion")
+    @Path("/iniciarSesion")
     @Produces(MediaType.APPLICATION_JSON)
     public Response iniciarSesion(Usuario user) {
-        System.out.println("Usuario2:" + user);
-        if (gm.logIn(user.getUsername(), user.getPassword())){
-            System.out.println("FSAFDAS");
-            return Response.status(201).entity(user).build();
-        }
+
+        if (gm.logIn(user.getUsername(), user.getPassword())) return Response.status(201).build();
 
         else return Response.status(404).build();
     }
