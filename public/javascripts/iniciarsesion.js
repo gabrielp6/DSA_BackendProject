@@ -1,36 +1,31 @@
-var BASE_URI= "http://localhost:8080/dsaApp"
 $(document).ready(function(){
 
-   $("#btnIniciarSesion").click(function(e){
-       e.preventDefault();
+   $("#btnIniciarSesion").click(function(){
        var username = $('#username').val();
-       var password = $('#password').val();
-       alert("1111");
+       var contraseña = $('#contraseña').val();
        $.ajax({
            headers: {
                'Accept': 'application/json',
                'Content-Type': 'application/json'
                },
-               url: BASE_URI.concat("/auth/iniciarSesion"),
+               url: "/dsaApp/auth/iniciarSesion",
                type: "POST",
                data: JSON.stringify({"username": username, "password": password}),
                dataType:'json',
 
-               success: function (data) {
-                   alert("3333");
+               success: function (response) {
                    myStorage.setItem("user",response.username);
                    myStorage.setItem("password",response.password);
                    myStorage.setItem("id",response.id);
 
-                   message = '"Has iniciado sesión"';
+
+                    message = '"Has iniciado sesión"';
 
                },
                 error: function(error){
 
-                   alert("Error: "+ error);
                    message = '"Nombre/contraseña mal introducido"';
 
                },
         });
     });
-   })
