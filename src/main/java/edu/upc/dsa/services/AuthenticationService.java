@@ -1,5 +1,6 @@
 package edu.upc.dsa.services;
 import edu.upc.dsa.GameManagerImpl;
+import edu.upc.dsa.models.Credentials;
 import edu.upc.dsa.models.Usuario;
 
 import io.swagger.annotations.*;
@@ -53,9 +54,10 @@ public class AuthenticationService {
     })
     @Path("/iniciarSesion")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response iniciarSesion(Usuario user) {
+    public Response iniciarSesion(Credentials credentials) {
 
-        if (gm.logIn(user.getUsername(), user.getPassword())) return Response.status(201).build();
+        if (gm.logIn(credentials.getUsername(), credentials.getPassword()))
+            return Response.status(201).entity(credentials).build();
 
         else return Response.status(404).build();
     }
