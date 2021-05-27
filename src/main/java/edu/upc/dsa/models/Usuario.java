@@ -7,8 +7,7 @@ public class Usuario {
     String username;
     String password;
     String email;
-    int idUsuario;
-    int monedas;
+    int coins;
 
     List<Objeto> listaObjetos;
     List<Partida> listaPartidas;
@@ -17,6 +16,13 @@ public class Usuario {
     public Usuario() {
     }
 
+
+    public Usuario(String username, String password, String email, int coins) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.coins = coins;
+    }
 
     public Usuario(String username, String password, String email) {
         this.username = username;
@@ -49,20 +55,12 @@ public class Usuario {
 
     public void setEmail(String email) { this.email = email; }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getCoins() {
+        return coins;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public int getMonedas() {
-        return monedas;
-    }
-
-    public void setMonedas(int monedas) {
-        this.monedas = monedas;
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 
     public List<Objeto> getListaObjetos() {

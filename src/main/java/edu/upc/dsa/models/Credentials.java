@@ -6,6 +6,8 @@ public class Credentials {
 
     String username;
     String password;
+    int id;
+
 
 
     public Credentials() {
@@ -33,5 +35,11 @@ public class Credentials {
         this.password = password;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

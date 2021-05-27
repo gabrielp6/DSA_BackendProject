@@ -6,10 +6,9 @@ USE bbdd;
 
 CREATE TABLE usuario(
 	username VARCHAR(30) NOT NULL,
-	contraseña VARCHAR(30),
-	correo VARCHAR(50),
-	idUsuario INT,
-	monedas INT,
+	password VARCHAR(30),
+	email VARCHAR(50),
+	coins INT,
 	PRIMARY KEY(username)
 )ENGINE = InnoDB;
 
@@ -32,11 +31,3 @@ CREATE TABLE partida(
 	enemigosmatados INT,
 	FOREIGN KEY (usuario) REFERENCES usuario(username)
 )ENGINE = InnoDB
-
-______________________________
-
-
-INSERT INTO usuario (username, contraseña, correo, idUsuario, monedas) VALUES ('gabriel6','holahola','gabriel11@gmail.com', 1, 150);
-INSERT INTO objeto (nombre, idObjeto, coste) VALUES ('pocion', 1, 20);
-INSERT INTO mapa (nombre, enemigos) VALUES ('bosque',4");
-INSERT INTO partida (548, 23, 4);

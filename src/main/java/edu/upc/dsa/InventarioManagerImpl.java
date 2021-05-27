@@ -40,7 +40,7 @@ public class InventarioManagerImpl implements InventarioManager{
 
         Usuario user = gameManager.getUser(o.getIdUsuario());
         int coste = o.getCoste();
-        int monedasDisponibles = gameManager.getUser(o.getIdUsuario()).getMonedas();
+        int monedasDisponibles = gameManager.getUser(o.getIdUsuario()).getCoins();
 
         if (coste > monedasDisponibles) {
             logger.info("No tienes suficiente dinero");
@@ -49,7 +49,7 @@ public class InventarioManagerImpl implements InventarioManager{
 
         else {
             int monedasActualizadas = (monedasDisponibles - coste);
-            user.setMonedas(monedasActualizadas);
+            user.setCoins(monedasActualizadas);
             // gameManager.actualizarUsuario(user); HARÁ FALTA IMPLEMENTAR
 
             logger.info("Objeto" + o.getNombre() + "comprado por" + gameManager.getUser(o.getIdUsuario()).getUsername());
