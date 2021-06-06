@@ -1,3 +1,4 @@
+
 package edu.upc.dsa.DAO;
 
 import edu.upc.dsa.FactorySession;
@@ -154,7 +155,6 @@ public class GameManagerImplDAO implements GameManagerDAO {
 
 
 
-
     @Override
     public int usuariosSize() {
         return listaUsuariosHM.size();
@@ -199,3 +199,4 @@ public class GameManagerImplDAO implements GameManagerDAO {
         return encontrado;
     }
 }
+

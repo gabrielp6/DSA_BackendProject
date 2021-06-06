@@ -2,6 +2,8 @@ package edu.upc.dsa.util;
 
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class ObjectHelper {
     public static String[] getFields(Object entity) {
@@ -21,14 +23,65 @@ public class ObjectHelper {
 
 
     public static void setter(Object object, String property, Object value) {
-        // Method // invoke
+        Method method = null;
 
+        try{
+            if(value.getClass() == Integer.class)
+                method = object.getClass().getDeclaredMethod(getSetter(property),int.class);
+            else
+                method = object.getClass().getDeclaredMethod(getSetter(property),value.getClass());
 
+            method.invoke(object,value);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static Object getter(Object object, String property) {
-        // Method // invoke
 
-        return null;
+    public static Object getter(Object object, String property) {
+        Method method = null;
+        Object ressult = null;
+        try {
+            method = object.getClass().getDeclaredMethod(getGetter(property), null); //User.getIdUser()
+            ressult = method.invoke(object); //ressult = id
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return ressult;
+    }
+
+    private static String getGetter(String property){
+        String res;
+        res="get"+property.substring(0,1).toUpperCase()+property.substring(1);
+        return res;
+    }
+
+    private static String getSetter(String property){
+        String res;
+        res="set"+property.substring(0,1).toUpperCase()+property.substring(1);
+        return res;
+    }
+
+
+    public static int getId(Object entity) throws IllegalAccessException {  /***/
+
+        Class theClass = entity.getClass();
+
+        Field[] fields = theClass.getDeclaredFields();
+
+        String[] sFields = new String[fields.length];
+
+        Field ID = fields[0];
+        int id = ID.getInt(entity);
+
+        return id;
     }
 }

@@ -1,4 +1,6 @@
 package edu.upc.dsa.services;
+import edu.upc.dsa.DAO.ObjetoDAO;
+import edu.upc.dsa.DAO.ObjetoImplDAO;
 import edu.upc.dsa.GameManagerImpl;
 
 import edu.upc.dsa.InventarioManagerImpl;
@@ -18,10 +20,11 @@ public class TiendaService {
 
     private GameManagerImpl gm;
     private InventarioManagerImpl im;
-
+    private final ObjetoDAO objetoDAO;
 
     public TiendaService() {
         this.gm = GameManagerImpl.getInstance();
+        objetoDAO = ObjetoImplDAO.getInstance();
     }
 
 
@@ -68,17 +71,23 @@ public class TiendaService {
     @ApiOperation(value = "comprar objeto", notes = "No")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = Objeto.class),
-            @ApiResponse(code = 402, message = "Error dinero"),
+            @ApiResponse(code = 402, message = "No tienes suficiente dinero"),
+            @ApiResponse(code = 404, message = "Not found", response = Objeto.class),
     })
-    @Path("/comprarObjeto")
+    @Path("/comprarObjeto/{nombre}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response comprarObjeto(Objeto o) {
+    public Response comprarObjeto(@PathParam("nombre") String nombre){
 
-        if(this.im.Comprar(o) == true){
-            return Response.status(201).entity(o).build();
+        if(ObjetoDAO.exists(nombre)) {
+           // int id = (int) objetoDAO.readParameterByParameter("id", "name", nombre);
+            //Objeto objeto = ObjetoDAO.readByParameter("id", id);
+
+            //if (objeto.getCoste() //> monedas del usuario) {
+
+              //  return Response.status(701).entity(objeto).build();
+
+            }
         }
-        else return Response.status(402).build();
-
     }
 
 }
