@@ -22,5 +22,5 @@ public interface Session<E> {
     HashMap<Integer, Object> readAll(Class theClass);
     HashMap<Integer, Object> readAllByParameter(Class theClass, String byParameter, Object byParameterValue);
 
-    List<Object> query(String query, Class theClass, HashMap params);
+    List<Object> query(String query, Class theClass, List params);
 }

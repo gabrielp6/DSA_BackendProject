@@ -2,51 +2,69 @@ package edu.upc.dsa.models;
 
 public class Objeto {
 
-    String nombre;
-    int coste;
-    String idObjeto;
-    String idUsuario;
+    String idObject;
+    String name;
+    int cost;
+    String idUser;
+    int healthPointsAdded;
+    int defensePointsAdded;
 
 
 
     public Objeto() {
     }
 
-    public Objeto(String nombre, int coste) {
-        this.nombre = nombre;
-        this.coste = coste;
+    public Objeto(String name, int cost) {
+        this.name = name;
+        this.cost = cost;
 
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getCoste() {
-        return coste;
+    public int getCost() {
+        return cost;
     }
 
-    public void setCoste(int coste) {
-        this.coste = coste;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
-    public String getIdObjeto() {
-        return idObjeto;
+    public String getIdObject() {
+        return idObject;
     }
 
-    public void setIdObjeto(String idObjeto) {
-        this.idObjeto = idObjeto;
+    public void setIdObject(String idObject) {
+        this.idObject = idObject;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public int getHealthPointsAdded() {
+        return healthPointsAdded;
+    }
+
+    public void setHealthPointsAdded(int healthPointsAdded) {
+        this.healthPointsAdded = healthPointsAdded;
+    }
+
+    public int getDefensePointsAdded() {
+        return defensePointsAdded;
+    }
+
+    public void setDefensePointsAdded(int defensePointsAdded) {
+        this.defensePointsAdded = defensePointsAdded;
     }
 }

@@ -3,7 +3,7 @@ package edu.upc.dsa.DAO;
 
 import edu.upc.dsa.FactorySession;
 import edu.upc.dsa.Session;
-import edu.upc.dsa.models.Credentials;
+import edu.upc.dsa.models.Objeto;
 import edu.upc.dsa.models.Usuario;
 
 import java.util.*;
@@ -12,16 +12,16 @@ import java.util.logging.Logger;
 
 public class GameManagerImplDAO implements GameManagerDAO {
 
-    /*
+
     public HashMap<String, Usuario> listaUsuariosHM;
     public List<Usuario> listaUsuarios;
 
-     */
 
-    private static GameManagerImplDAO implementation;
+
+    private static GameManagerDAO implementation;
     static final Logger logger = Logger.getLogger(GameManagerImplDAO.class.getName());
 
-    public static GameManagerImplDAO getInstance() {
+    public static GameManagerDAO getInstance() {
         if (implementation == null) {
             implementation = new GameManagerImplDAO();
         }
@@ -45,7 +45,7 @@ public class GameManagerImplDAO implements GameManagerDAO {
     @Override
     public void registrar(String username, String password, String email) {
         Session session = null;
-        int coins =900;
+        int coins = 900;
         //int userID = 0;
         try {
             session = FactorySession.openSession();
@@ -59,10 +59,10 @@ public class GameManagerImplDAO implements GameManagerDAO {
         finally {
             session.close();
         }
-        //return userID;
     }
 
-
+/* BORRAR
+------------------------------------------------------------------------------------
     @Override
     public boolean logIn(String username, String password) {
         Usuario user = listaUsuariosHM.get(username);
@@ -75,36 +75,50 @@ public class GameManagerImplDAO implements GameManagerDAO {
         }
         return false;
     }
-
-    public int logIn(String username, String password) {
+-------------------------------------------------------------------------------------
+*/
+    public Usuario logIn(String username, String password) {
         Session session = null;
-        int userID = getUser(username).getIdUsuario();
-        Usuario usuario = null;
+        Usuario user = null;
+
+        List<Objeto> objetosList=new LinkedList<>();;
+
+        String query = "SELECT id FROM Usuario WHERE username = ? AND password = AES_ENCRYPT(?,'thePassword')";
+        String query2 = "SELECT idObject FROM Objeto WHERE idUser = ?";
+
+        List<String> params= new LinkedList<>();
+        List<String> params2= new LinkedList<>();
+        params.add(username);
+        params.add(password);
         try {
-
-            user = (User)session.get(User.class, id);
-            if(user==null) throw new UserNotFoundException();
-            if(!password.equals(user.getPassword())) throw new PasswordNotMatchException();
-
-
             session = FactorySession.openSession();
 
+            List ID = session.query(query, Usuario.class, params);
+            String idFinal = (String) ID.get(0);
+            user = (Usuario) session.get(Usuario.class, idFinal);
+            params2.add(user.getId());
 
-            Credentials credentials = new Credentials(username, password);
-            session.save(credentials);
-            logger.info("Usuario logeado:" + username);
+            if (idFinal != null) {
+                List idsObjetosUsuario = session.query(query2, Objeto.class, params2);
+                for (Object f : idsObjetosUsuario) {
+                    objetosList.add((Objeto)session.get(Objeto.class, (String) f));
+                }
+            }
+            user.setObjectsList(objetosList);
         }
-        catch (Exception e) {
-            logger.warning("Error al registrar");
+        catch(Exception e) {
+            e.printStackTrace();
         }
-        finally {
+        finally{
             session.close();
         }
-        return userID;
+        logger.info("Return the user" + user);
+
+        return user;
     }
 
     //implementar logIn
-    @Override
+    /*@Override
     public User logIn(String username, String password) throws UserNotFoundException, PasswordNotMatchException, UserAlreadyConectedException {
         int id = getIdUser(username,password);
         SessionManager session = null;
@@ -141,7 +155,7 @@ public class GameManagerImplDAO implements GameManagerDAO {
     }
 
 
-
+*/
 
 
 

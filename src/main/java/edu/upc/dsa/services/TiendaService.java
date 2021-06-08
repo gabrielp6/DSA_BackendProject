@@ -66,7 +66,7 @@ public class TiendaService {
 
 
 
-
+/*
     @POST //Comprar objeto
     @ApiOperation(value = "comprar objeto", notes = "No")
     @ApiResponses(value = {
@@ -88,6 +88,6 @@ public class TiendaService {
 
             }
         }
-    }
+    }*/
 
 }

@@ -38,9 +38,9 @@ public class InventarioManagerImpl implements InventarioManager{
     @Override
     public boolean Comprar(Objeto o) {
 
-        Usuario user = gameManager.getUser(o.getIdUsuario());
-        int coste = o.getCoste();
-        int monedasDisponibles = gameManager.getUser(o.getIdUsuario()).getCoins();
+        Usuario user = gameManager.getUser(o.getIdUser());
+        int coste = o.getCost();
+        int monedasDisponibles = gameManager.getUser(o.getIdUser()).getCoins();
 
         if (coste > monedasDisponibles) {
             logger.info("No tienes suficiente dinero");
@@ -52,7 +52,7 @@ public class InventarioManagerImpl implements InventarioManager{
             user.setCoins(monedasActualizadas);
             // gameManager.actualizarUsuario(user); HARÁ FALTA IMPLEMENTAR
 
-            logger.info("Objeto" + o.getNombre() + "comprado por" + gameManager.getUser(o.getIdUsuario()).getUsername());
+            logger.info("Objeto" + o.getName() + "comprado por" + gameManager.getUser(o.getIdUser()).getUsername());
             return true;
 
         }
@@ -60,7 +60,7 @@ public class InventarioManagerImpl implements InventarioManager{
 
     @Override
     public List<Objeto> mostrarObjetosUsuario(Usuario usuario) {
-        return usuario.getListaObjetos();
+        return usuario.getObjectsList();
     }
 
     @Override

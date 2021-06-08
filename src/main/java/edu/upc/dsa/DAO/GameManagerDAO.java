@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface GameManagerDAO {
 
-    public int registrar(String username, String contraseña, String email);
+    public void registrar(String username, String contraseña, String email);
 
-    public boolean logIn(String username, String password);
+    public Usuario logIn(String username, String password);
 
     public Usuario getUser(String username);
 

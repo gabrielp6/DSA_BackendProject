@@ -10,7 +10,9 @@ public interface ObjetoDAO {
 
     List<Objeto> listaObjetos();
 
-    static boolean exists(String nombre);
+    static boolean exists(String nombre) {
+        return false;
+    }
 
     boolean eliminarObjeto(Objeto objeto);
 
