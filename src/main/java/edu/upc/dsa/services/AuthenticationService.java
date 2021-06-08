@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 
 
 @Api(value = "/auth", description = "no")
-@Path("/auth")
+@Path("")
 
 public class AuthenticationService {
 
@@ -38,7 +38,7 @@ public class AuthenticationService {
 
     })
 
-    @Path("/registrarUsuario")
+    @Path("/auth/registrarUsuario")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registrarUsuario(Usuario usuario) {
 
@@ -54,7 +54,7 @@ public class AuthenticationService {
         }
         }
         */
-
+        System.out.println("usuario:" + usuario);
         if (usuario.getUsername()==null || usuario.getEmail()==null || usuario.getPassword()==null)  return Response.status(500).entity(usuario).build();
         gm.registrar(usuario.getUsername(), usuario.getPassword(), usuario.getEmail());
         return Response.status(201).entity(usuario).build();
@@ -69,7 +69,7 @@ public class AuthenticationService {
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 400, message = "Campos necesarios vacíos")
     })
-    @Path("/iniciarSesion")
+    @Path("/auth/iniciarSesion")
     @Produces(MediaType.APPLICATION_JSON)
     public Response iniciarSesion(Credentials credentials) {
 

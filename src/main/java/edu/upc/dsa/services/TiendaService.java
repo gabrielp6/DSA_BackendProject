@@ -72,7 +72,7 @@ public class TiendaService {
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = Objeto.class),
             @ApiResponse(code = 402, message = "No tienes suficiente dinero"),
-            @ApiResponse(code = 404, message = "Not found", response = Objeto.class),
+            @ApiResponse(code = 404, message = "Not found"),
     })
     @Path("/comprarObjeto/{nombre}")
     @Produces(MediaType.APPLICATION_JSON)

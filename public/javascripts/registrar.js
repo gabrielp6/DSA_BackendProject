@@ -3,8 +3,9 @@ var BASE_URI = "http://localhost:8080/dsaApp"
 $(document).ready(function(){
 
     $("#btnRegistrar").click(function(e){
+        e.preventDefault();
         var username = $('#username').val();
-        var email = $('#correo').val();
+        var email = $('#email').val();
         var password = $('#password').val();
         var passwordRepetido = $('#passwordRepetido').val();
             if(password == passwordRepetido){
@@ -18,10 +19,11 @@ $(document).ready(function(){
                     data: JSON.stringify({"username": username, "password": password, "email": email}),
                     dataType:'json',
 
+
                     success: function (data) {
                     alert("Usuario registrado correctamente!");
                     console.log("Registrado");
-
+                    window.open("iniciarsesion.html");
 
                     },
                     error: function(error){
@@ -34,9 +36,8 @@ $(document).ready(function(){
             }
 
             else{
-
                     alert("Las contraseñas no coinciden");
                     message = '"Las contraseñas no coinciden"';
-
             }
+    });
     });
