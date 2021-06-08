@@ -2,18 +2,15 @@ package edu.upc.dsa;
 
 import edu.upc.dsa.util.ObjectHelper;
 import edu.upc.dsa.util.QueryHelper;
-import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 
 public class SessionImpl implements Session {
     private final Connection conn;
-    final static Logger logger = Logger.getLogger(SessionImpl.class);
 
     public SessionImpl(Connection conn) {
         this.conn = conn;
@@ -73,40 +70,12 @@ public class SessionImpl implements Session {
 
     }
 
-    @Override
-    public Object get(Class theClass, String ID) {
-        Object obj = null;
-        PreparedStatement pstm = null;
-        //Instantiating a object of type class for the getters
-
-        try {
-            obj = theClass.newInstance();
-            String selectQuery = QueryHelper.createQuerySELECT(obj);
-
-            pstm = conn.prepareStatement(selectQuery);
-
-            pstm.setObject(1, ID);
-            ResultSet resultSet =  pstm.executeQuery();
-            int i = 0;
-
-            while (resultSet.next()){
-
-                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-                for(i=1;i<=resultSetMetaData.getColumnCount();i++){
-                    String name = resultSetMetaData.getColumnName(i);
-                    ObjectHelper.setter(obj,name, resultSet.getObject(i));
-                }
-
-            }
-        } catch (IllegalAccessException | InstantiationException | SQLException e) {
-            e.printStackTrace();
-        }
-
-        logger.info("El objeto es " +obj );
-        return obj;
+    public Object get(Class theClass, String pk) {
+        //"SELECT * FROM USUARIO WHERE " + pk + "=?"
+        return null;
     }
 
-    public void update(Object object) {
+    public boolean update(Object object) {
         try {
 
             String updateQuery = QueryHelper.createQueryUPDATE(object);
@@ -123,13 +92,70 @@ public class SessionImpl implements Session {
             pstm.setObject(i++, ObjectHelper.getter(object, ObjectHelper.getFields(object)[0]));
             pstm.executeQuery();
 
+            return true;
+
 
         } catch (SQLException exception) {
 
             exception.printStackTrace();
-
+            return false;
 
         }
+    }
+
+    public boolean updateByParameter(Object object, String byParameter, Object byParameterValue) {
+
+        try {
+
+            String updateQuery = QueryHelper.createQueryUPDATEbyParameter(object.getClass(), byParameter);
+
+            PreparedStatement pstm = null;
+            pstm = conn.prepareStatement(updateQuery);
+            String field;
+            int i = 1;
+
+            while (i < ObjectHelper.getFields(object).length) {
+                field = ObjectHelper.getFields(object)[i];
+                pstm.setObject(i++, ObjectHelper.getter(object, field));
+            }
+
+            pstm.setObject(i++, ObjectHelper.getter(object, byParameterValue.toString()));
+            pstm.executeQuery();
+
+            return true;
+
+        } catch (SQLException exception) {
+
+            exception.printStackTrace();
+            return false;
+
+        }
+
+    }
+
+
+    public boolean updateParameterByParameter(Class theClass, String parameter, Object parameterValue, String byParameter, Object byParameterValue) {
+
+        try {
+
+            String updateQuery = QueryHelper.createQueryUPDATEparameterByParameter(theClass, parameter, byParameter);
+
+            PreparedStatement pstm;
+
+            pstm = conn.prepareStatement(updateQuery);
+            pstm.setObject(1, parameterValue);
+            pstm.setObject(2, byParameterValue);
+            pstm.executeQuery();
+
+            return true;
+
+        } catch (SQLException exception) {
+
+            exception.printStackTrace();
+            return false;
+
+        }
+
     }
 
     public boolean delete(Object object)  {
@@ -307,38 +333,5 @@ public class SessionImpl implements Session {
             return null;
 
         }
-
-
     }
-
-    @Override
-    public List<Object> query(String query, Class theClass, List params) {
-        PreparedStatement pstm = null;
-        List<Object> objResultado = new LinkedList<>();
-
-        try{
-            pstm = conn.prepareStatement(query);
-            int i = 1;
-            for(Object obj: params){
-                pstm.setObject(i, params.get(i-1));
-                logger.info("EL PARAMETRO ES " +params.get(i-1) );
-                i++;
-            }
-
-            ResultSet resultSet = pstm.executeQuery();
-            logger.info("ELRESULTADO DE LA QUERY OBJETOS " +resultSet );
-            while(resultSet.next()) {
-                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-                for(int j=1;j<=resultSetMetaData.getColumnCount();j++){
-                    objResultado.add(resultSet.getObject(j));
-
-                }
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        return objResultado;
-    }
-
 }

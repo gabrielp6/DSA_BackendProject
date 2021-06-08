@@ -40,7 +40,7 @@ public class GameManagerImpl implements GameManager {
         listaUsuariosHM.put(username, usuario);
 
         int idAsignado = listaUsuariosHM.size();
-        usuario.setIdUsuario(idAsignado);
+        //usuario.setIdUsuario(idAsignado);
 
         logger.info("Usuario añadido:" + username);
     }

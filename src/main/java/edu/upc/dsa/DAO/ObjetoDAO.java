@@ -6,15 +6,18 @@ import java.util.List;
 
 public interface ObjetoDAO {
 
-    boolean crearObjeto(Objeto objeto);
+    boolean create(Objeto objeto);
 
-    List<Objeto> listaObjetos();
+    List<Objeto> readAll();
 
-    static boolean exists(String nombre) {
-        return false;
-    }
+    boolean existsByParameter(String nombre);
 
-    boolean eliminarObjeto(Objeto objeto);
+    boolean update(Objeto objeto);
+    boolean updateByParameter(Objeto objeto, String parameter, Object value);
+
+    //para consumir en un usuario??
+    boolean delete(Objeto objeto);
+    boolean deleteByParameter(String parameter, Object value);
 
 
 

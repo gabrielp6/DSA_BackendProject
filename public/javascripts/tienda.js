@@ -74,7 +74,7 @@ $(document).ready(function() {
     $('#buttonPocionAzul').click(function () {
             $.ajax({
                 type: 'POST',
-                url: BASE_URI.concat("/tienda/pocionAzul"),
+                url: BASE_URI.concat("/tienda/comprarObjeto/pocionAzul"),
                 success: function(respuesta) {
                         alert("Poción azul comprada correctamente");
                 }

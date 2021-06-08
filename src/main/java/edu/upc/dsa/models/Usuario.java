@@ -4,16 +4,13 @@ import java.util.List;
 
 public class Usuario {
 
-    String id;
     String username;
     String password;
     String email;
-    int health;
-    int defense;
     int coins;
 
-    List<Objeto> objectsList;
-    List<Partida> gamesList;
+    List<Objeto> listaObjetos;
+    List<Partida> listaPartidas;
 
 
     public Usuario() {
@@ -66,43 +63,23 @@ public class Usuario {
         this.coins = coins;
     }
 
-    public List<Objeto> getObjectsList() {
-        return objectsList;
+    public List<Objeto> getListaObjetos() {
+        return listaObjetos;
     }
 
-    public void setObjectsList(List<Objeto> objectsList) {
-        this.objectsList = objectsList;
+    public void setListaObjetos(List<Objeto> listaObjetos) {
+        this.listaObjetos = listaObjetos;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public List<Partida> getGamesList() {
-        return gamesList;
-    }
-
-    public void setGamesList(List<Partida> gamesList) {
-        this.gamesList = gamesList;
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", coins=" + coins +
+                ", listaObjetos=" + listaObjetos +
+                ", listaPartidas=" + listaPartidas +
+                '}';
     }
 }

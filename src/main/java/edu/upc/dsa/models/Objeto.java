@@ -2,69 +2,51 @@ package edu.upc.dsa.models;
 
 public class Objeto {
 
-    String idObject;
-    String name;
-    int cost;
-    String idUser;
-    int healthPointsAdded;
-    int defensePointsAdded;
+    String nombre;
+    int coste;
+    String idObjeto;
+    String idUsuario;
 
 
 
     public Objeto() {
     }
 
-    public Objeto(String name, int cost) {
-        this.name = name;
-        this.cost = cost;
+    public Objeto(String nombre, int coste) {
+        this.nombre = nombre;
+        this.coste = coste;
 
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getCost() {
-        return cost;
+    public int getCoste() {
+        return coste;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setCoste(int coste) {
+        this.coste = coste;
     }
 
-    public String getIdObject() {
-        return idObject;
+    public String getIdObjeto() {
+        return idObjeto;
     }
 
-    public void setIdObject(String idObject) {
-        this.idObject = idObject;
+    public void setIdObjeto(String idObjeto) {
+        this.idObjeto = idObjeto;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
-    public int getHealthPointsAdded() {
-        return healthPointsAdded;
-    }
-
-    public void setHealthPointsAdded(int healthPointsAdded) {
-        this.healthPointsAdded = healthPointsAdded;
-    }
-
-    public int getDefensePointsAdded() {
-        return defensePointsAdded;
-    }
-
-    public void setDefensePointsAdded(int defensePointsAdded) {
-        this.defensePointsAdded = defensePointsAdded;
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

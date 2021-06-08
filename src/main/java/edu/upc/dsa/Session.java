@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface Session<E> {
 
+    //FUNCIONES QUE USAREMOS EN CADA DAO POR SEPARADO CON SUS CLASES
     boolean create(Object object);
     void save(Object entity);
     void close();
@@ -14,13 +15,14 @@ public interface Session<E> {
     Object readByParameter(Class theClass, String byParameter, Object byParameterValue);
     Object readParameterByParameter(Class theClass, String parameter, String byParameter, Object byParameterValue);
 
-    void update(Object object);
+    boolean update(Object object);
+    boolean updateByParameter(Object object, String byParameter, Object byParameterValue);
+    boolean updateParameterByParameter(Class theClass, String parameter, Object parameterValue, String byParameter, Object byParameterValue);
+
     boolean delete(Object object);
     boolean deleteByParameter(Class theClass, String byParameter, Object byParameterValue);
 
 
     HashMap<Integer, Object> readAll(Class theClass);
     HashMap<Integer, Object> readAllByParameter(Class theClass, String byParameter, Object byParameterValue);
-
-    List<Object> query(String query, Class theClass, List params);
 }

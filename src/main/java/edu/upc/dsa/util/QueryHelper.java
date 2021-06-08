@@ -66,6 +66,40 @@ public class QueryHelper {
         return sb.toString();
     }
 
+    public static String createQueryUPDATEbyParameter(Object object, String parameter){
+
+        String [] fields = ObjectHelper.getFields(object);
+        StringBuffer sb = new StringBuffer("UPDATE ");
+        sb.append(object.getClass().getSimpleName()).append(" ");
+        sb.append("SET ");
+        String field;
+
+        int i = 1;
+        while (i<fields.length){
+            field = fields[i];
+            if (i>1) sb.append(" = ?, ");
+            sb.append(field);
+            i++;
+        }
+        sb.append(" = ?");
+        sb.append(" WHERE " + parameter + " = ?");
+
+        System.out.println(sb);
+
+        return sb.toString();
+    }
+
+    public static String createQueryUPDATEparameterByParameter(Class theClass, String parameter, String byParameter) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("UPDATE " + theClass.getSimpleName() + " SET " + parameter + " = ?");
+        sb.append(" WHERE " + byParameter + " = ? ");
+
+        System.out.println(sb);
+
+        return sb.toString();
+    }
+
+
     public static String createQueryDELETE(Object entity){
 
         StringBuffer sb = new StringBuffer("DELETE FROM ");

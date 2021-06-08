@@ -24,26 +24,25 @@ public class ObjetoImplDAO implements ObjetoDAO{
     }
 
 
-
-    public boolean crearObjeto(Objeto objeto) {
+    @Override
+    public boolean create(Objeto objeto) {
         return session.create(objeto);
     }
 
-    // READ
-    public List<Objeto> listaObjetos(){
-
+    @Override
+    public List<Objeto> readAll() {
         Session session;
         List<Objeto> listaObjetos;
 
-        HashMap<Integer, Object> result;
+        HashMap<Integer, Objeto> result;
 
         session = FactorySession.openSession();
         result = session.readAll(Objeto.class);
 
         listaObjetos = new ArrayList<>();
 
-        for (Object object : result.values()) {
-            listaObjetos.add((Objeto) object);
+        for (Objeto objeto : result.values()) {
+            listaObjetos.add((Objeto) objeto);
         }
 
         session.close();
@@ -51,17 +50,46 @@ public class ObjetoImplDAO implements ObjetoDAO{
         return listaObjetos;
     }
 
+    @Override
+    public boolean existsByParameter(String nombre) {
+        return (session.readByParameter(Objeto.class, "nombre", nombre) != null);
+    }
+
+    @Override
+    public boolean update(Objeto objeto) {
+        return session.update(objeto);
+    }
+
+    @Override
+    public boolean updateByParameter(Objeto objeto, String parameter, Object value) {
+        return session.updateByParameter(Objeto.class, parameter, value);
+    }
+
+    @Override
+    public boolean delete(Objeto objeto) {
+        return session.delete(objeto);
+    }
+
+    @Override
+    public boolean deleteByParameter(String parameter, Object value) {
+        return session.deleteByParameter(Objeto.class, parameter, value);
+    }
+
+    /*
+
 
     public boolean exists(String name) {
-
         return (session.readByParameter(Objeto.class, "name", name) != null);
     }
 
 
 
-    public boolean eliminarObjeto(Objeto objeto) {
-
+    public boolean delete(Objeto objeto) {
         return session.delete(objeto);
 
     }
+
+    public boolean deleteByParameter(String parameter, Object value){
+        return session.updateByParameter(Objeto.class, parameter, value);
+    }*/
 }

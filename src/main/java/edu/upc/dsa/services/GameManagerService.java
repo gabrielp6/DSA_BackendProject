@@ -36,7 +36,7 @@ public class GameManagerService {
 
     })
 
-    @Path("/addUsuario")///addUsuario/{username}/{contraseña}/{email}")
+    @Path("/addUsuario")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response nuevoUsuario(Usuario usuario) {
 
