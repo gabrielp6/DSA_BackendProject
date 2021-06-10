@@ -76,7 +76,7 @@ public class UsuarioImplDAO implements UsuarioDAO{
     }
 
     @Override
-    public boolean correctPassword(String username, String password) {
+    public boolean readPassword(String username, String password) {
         String passwordUsuario = (String) readParameterByParameter("password", "username", username);
         if (password.equals(passwordUsuario))
             return true;

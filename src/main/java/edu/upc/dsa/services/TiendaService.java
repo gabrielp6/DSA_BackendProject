@@ -1,10 +1,13 @@
 package edu.upc.dsa.services;
 import edu.upc.dsa.DAO.ObjetoDAO;
 import edu.upc.dsa.DAO.ObjetoImplDAO;
+import edu.upc.dsa.DAO.UsuarioDAO;
+import edu.upc.dsa.DAO.UsuarioImplDAO;
 import edu.upc.dsa.GameManagerImpl;
 
 import edu.upc.dsa.InventarioManagerImpl;
 import edu.upc.dsa.models.Objeto;
+import edu.upc.dsa.models.Usuario;
 import io.swagger.annotations.*;
 
 import javax.ws.rs.*;
@@ -21,10 +24,12 @@ public class TiendaService {
     private GameManagerImpl gm;
     private InventarioManagerImpl im;
     private final ObjetoDAO objetoDAO;
+    private final UsuarioDAO usuarioDAO;
 
     public TiendaService() {
         this.gm = GameManagerImpl.getInstance();
         objetoDAO = ObjetoImplDAO.getInstance();
+        usuarioDAO = UsuarioImplDAO.getInstance();
     }
 
 
@@ -32,16 +37,22 @@ public class TiendaService {
     @GET //Ver catalogo del juego
     @ApiOperation(value = "catalogo", notes = "Devuelve todos los objetos del juego")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Objeto.class, responseContainer="List"),
+            @ApiResponse(code = 200, message = "Successful", response = Objeto.class, responseContainer="List"),
     })
     @Path("/catalogo")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllObjetos() {
 
-        List<Objeto> objetos = this.im.mostrarTodosObjetos();
+       /*
+       List<Objeto> objetos = this.im.mostrarTodosObjetos();
 
         GenericEntity<List<Objeto>> entity = new GenericEntity<List<Objeto>>(objetos) {};
         return Response.status(201).entity(entity).build();
+
+        */
+        List<Objeto> listaObjetos = objetoDAO.readAll();
+        GenericEntity<List<Objeto>> entity = new GenericEntity<List<Objeto>>(listaObjetos) {};
+        return Response.status(200).entity(entity).build();
 
     }
 
@@ -66,7 +77,6 @@ public class TiendaService {
 
 
 
-/*
     @POST //Comprar objeto
     @ApiOperation(value = "comprar objeto", notes = "No")
     @ApiResponses(value = {
@@ -76,18 +86,29 @@ public class TiendaService {
     })
     @Path("/comprarObjeto/{nombre}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response comprarObjeto(@PathParam("nombre") String nombre){
+    public Response comprarObjeto(@PathParam("nombre") String nombre, @QueryParam("username") String username){
 
-        if(ObjetoDAO.exists(nombre)) {
-           // int id = (int) objetoDAO.readParameterByParameter("id", "name", nombre);
-            //Objeto objeto = ObjetoDAO.readByParameter("id", id);
+        if(objetoDAO.existsByParameter(nombre)) {
 
-            //if (objeto.getCoste() //> monedas del usuario) {
+            Objeto objeto = objetoDAO.readByParameter("nombre", nombre);
+            Usuario usuario = usuarioDAO.readByParameter("username", username);
 
-              //  return Response.status(701).entity(objeto).build();
-
+            if(objeto.getCoste() > usuario.getCoins()){
+                    return Response.status(402).build();
             }
-        }*/
+            else{
+
+                int monedasActualizadas = usuario.getCoins()-objeto.getCoste();
+                usuarioDAO.updateParameterByParameter("coins", monedasActualizadas, "username", username);
+                return Response.status(200).build();
+            }
+            }
+
+        else{
+            return Response.status(404).build();
+        }
+        }
+
 
 
 }

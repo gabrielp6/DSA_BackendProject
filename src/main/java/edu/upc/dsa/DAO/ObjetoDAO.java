@@ -9,6 +9,7 @@ public interface ObjetoDAO {
     boolean create(Objeto objeto);
 
     List<Objeto> readAll();
+    Objeto readByParameter(String parameter, Object value);
 
     boolean existsByParameter(String nombre);
 

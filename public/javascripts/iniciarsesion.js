@@ -17,11 +17,9 @@ $(document).ready(function(){
                dataType:'json',
 
                success: function (data) {
-               alert("Sesión iniciada correctamente");
-                   myStorage.setItem("user",response.username);
-                   myStorage.setItem("password",response.password);
-                   myStorage.setItem("id",response.id);
-                    alert("Sesión iniciada correctamente");
+                   alert("Sesión iniciada correctamente");
+                   window.sessionStorage.setItem("user",data.username);
+                   window.sessionStorage.setItem("password",data.password);
                     message = '"Has iniciado sesión"';
 
                },

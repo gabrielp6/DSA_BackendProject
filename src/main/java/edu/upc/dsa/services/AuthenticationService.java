@@ -80,7 +80,7 @@ public class AuthenticationService {
 
         else{
         if (userDAO.exists(credentials.getUsername())){
-            if (userDAO.correctPassword(credentials.getUsername(), credentials.getPassword()))
+            if (userDAO.readPassword(credentials.getUsername(), credentials.getPassword()))
                 return Response.status(200).build();
         }
         else{
@@ -89,8 +89,9 @@ public class AuthenticationService {
         }
          */
 
-        if (gm.logIn(credentials.getUsername(), credentials.getPassword()))
+        if (gm.logIn(credentials.getUsername(), credentials.getPassword())) {
             return Response.status(201).entity(credentials).build();
+        }
 
         else return Response.status(404).build();
     }

@@ -46,6 +46,4 @@ public class EstadisticasService {
         //return Response.status(201).entity(entity).build();
         return null;
     }
-
-
 }

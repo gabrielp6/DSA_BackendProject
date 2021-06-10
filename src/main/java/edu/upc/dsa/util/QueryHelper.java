@@ -38,8 +38,6 @@ public class QueryHelper {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT * FROM ").append(theClass.getSimpleName());
 
-        System.out.println(sb);
-
         return sb.toString();
     }
 
@@ -60,8 +58,6 @@ public class QueryHelper {
         }
         sb.append(" = ?");
         sb.append(" WHERE id = ?");
-
-        System.out.println(sb);
 
         return sb.toString();
     }
@@ -84,8 +80,6 @@ public class QueryHelper {
         sb.append(" = ?");
         sb.append(" WHERE " + parameter + " = ?");
 
-        System.out.println(sb);
-
         return sb.toString();
     }
 
@@ -93,8 +87,6 @@ public class QueryHelper {
         StringBuffer sb = new StringBuffer();
         sb.append("UPDATE " + theClass.getSimpleName() + " SET " + parameter + " = ?");
         sb.append(" WHERE " + byParameter + " = ? ");
-
-        System.out.println(sb);
 
         return sb.toString();
     }
@@ -106,8 +98,6 @@ public class QueryHelper {
         sb.append(entity.getClass().getSimpleName());
         sb.append(" WHERE id = ?");
 
-        System.out.println(sb);
-
         return sb.toString();
 
     }
@@ -118,8 +108,6 @@ public class QueryHelper {
         sb.append("SELECT * FROM ").append(theClass.getSimpleName());
         sb.append(" WHERE " + byParameter + " = ?");
 
-        System.out.println(sb);
-
         return sb.toString();
     }
 
@@ -129,8 +117,6 @@ public class QueryHelper {
         sb.append(theClass.getSimpleName());
         sb.append(" WHERE " + byParameter + " = ?");
 
-        System.out.println(sb);
-
         return sb.toString();
     }
 
@@ -139,8 +125,6 @@ public class QueryHelper {
         StringBuffer sb = new StringBuffer("DELETE FROM ");
         sb.append(theClass.getSimpleName());
         sb.append(" WHERE " + parameter + " = ?");
-
-        System.out.println(sb);
 
         return sb.toString();
     }

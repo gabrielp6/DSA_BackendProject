@@ -1,6 +1,5 @@
 package edu.upc.dsa.DAO;
 
-import edu.upc.dsa.models.Credentials;
 import edu.upc.dsa.models.Usuario;
 
 import java.util.List;
@@ -13,10 +12,10 @@ public interface UsuarioDAO {
     List<Usuario> readAll();
     Usuario readByParameter(String parameter, Object value);
     Object readParameterByParameter(String parameter, String byParameter, Object value);
+    boolean readPassword(String username, String password);
 
     boolean exists(String username);
     boolean existsEmail(String email);
-    boolean correctPassword(String username, String password);
 
     boolean update(Usuario usuario);
     boolean updateByParameter(Usuario usuario, String parameter, Object value);

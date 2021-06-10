@@ -2,5 +2,11 @@ package edu.upc.dsa.models;
 
 public class Partida {
 
-    //Depende lo que queramos guardar de cada partida
+    int idPartida;
+    String username;
+    int enemigosMatados;
+    int tiempo;
+    int monedasRecogidas;
+
+
 }

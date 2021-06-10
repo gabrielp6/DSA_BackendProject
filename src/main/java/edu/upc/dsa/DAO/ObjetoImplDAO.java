@@ -51,6 +51,11 @@ public class ObjetoImplDAO implements ObjetoDAO{
     }
 
     @Override
+    public Objeto readByParameter(String parameter, Object value){
+        return ((Objeto) session.readByParameter(Objeto.class, parameter, value));
+    }
+
+    @Override
     public boolean existsByParameter(String nombre) {
         return (session.readByParameter(Objeto.class, "nombre", nombre) != null);
     }
@@ -74,22 +79,4 @@ public class ObjetoImplDAO implements ObjetoDAO{
     public boolean deleteByParameter(String parameter, Object value) {
         return session.deleteByParameter(Objeto.class, parameter, value);
     }
-
-    /*
-
-
-    public boolean exists(String name) {
-        return (session.readByParameter(Objeto.class, "name", name) != null);
-    }
-
-
-
-    public boolean delete(Objeto objeto) {
-        return session.delete(objeto);
-
-    }
-
-    public boolean deleteByParameter(String parameter, Object value){
-        return session.updateByParameter(Objeto.class, parameter, value);
-    }*/
 }

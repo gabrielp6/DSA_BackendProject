@@ -37,7 +37,7 @@ public class InventarioManagerImpl implements InventarioManager{
 
     @Override
     public boolean Comprar(Objeto o) {
-
+        /*
         Usuario user = gameManager.getUser(o.getIdUsuario());
         int coste = o.getCoste();
         int monedasDisponibles = gameManager.getUser(o.getIdUsuario()).getCoins();
@@ -50,12 +50,14 @@ public class InventarioManagerImpl implements InventarioManager{
         else {
             int monedasActualizadas = (monedasDisponibles - coste);
             user.setCoins(monedasActualizadas);
-            // gameManager.actualizarUsuario(user); HARÁ FALTA IMPLEMENTAR
+             gameManager.actualizarUsuario(user); HARÁ FALTA IMPLEMENTAR
 
             logger.info("Objeto" + o.getNombre() + "comprado por" + gameManager.getUser(o.getIdUsuario()).getUsername());
+
             return true;
 
-        }
+        }*/
+        return true;
     }
 
     @Override

@@ -4,17 +4,19 @@ public class Objeto {
 
     String nombre;
     int coste;
-    String idObjeto;
-    String idUsuario;
+    String descripcion;
+    String avatar;
 
 
 
     public Objeto() {
     }
 
-    public Objeto(String nombre, int coste) {
+    public Objeto(String nombre, int coste, String descripcion, String avatar) {
         this.nombre = nombre;
         this.coste = coste;
+        this.descripcion = descripcion;
+        this.avatar = avatar;
 
     }
 
@@ -34,19 +36,19 @@ public class Objeto {
         this.coste = coste;
     }
 
-    public String getIdObjeto() {
-        return idObjeto;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setIdObjeto(String idObjeto) {
-        this.idObjeto = idObjeto;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

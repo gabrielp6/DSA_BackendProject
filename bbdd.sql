@@ -6,29 +6,39 @@ USE bbdd;
 
 CREATE TABLE Usuario(
 
-	id VARCHAR(30) PRIMARY KEY NOT NULL,
-	username VARCHAR(30),
+	username VARCHAR(30) PRIMARY KEY NOT NULL,
 	password VARCHAR(30),
 	email VARCHAR(50),
 	vida INT,
-	defense INT,
-	coins INT,
+	fuerza INT,
+	coins INT
 
 )ENGINE = InnoDB;
+
+
+CREATE TABLE compras(
+
+    username VARCHAR(30),
+    nameObjeto VARCHAR(30),
+    FOREIGN KEY (username) REFERENCES usuario(username),
+    FOREIGN KEY (nameObjeto) REFERENCES objeto(name)
+
+)ENGINE = InnoDB;
+
 
 CREATE TABLE Objeto(
 	name VARCHAR(30),
 	cost INT,
-	idObject INT,
 	idUser VARCHAR,
 	healthPointsAdded INT,
-	defensePointsAdded INT
+	attackedPointsAdded INT
 
 )ENGINE = InnoDB;
 
+
 CREATE TABLE Mapa(
-	nameMap VARCHAR(30),
-	idMap VARCHAR
+
+	nameMap VARCHAR(30)
 )ENGINE = InnoDB;
 
 
