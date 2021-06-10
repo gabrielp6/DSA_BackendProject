@@ -1,6 +1,6 @@
 package edu.upc.dsa.models;
 
-public class Partida {
+public class RecordUsuario {
 
     int idPartida;
     String username;
@@ -9,10 +9,10 @@ public class Partida {
     int monedasRecogidas;
     int puntuacionFinal;
 
-    public Partida() {
+    public RecordUsuario() {
     }
 
-    public Partida(int idPartida, String username, int enemigosMatados, int tiempo, int monedasRecogidas, int puntuacionFinal) {
+    public RecordUsuario(int idPartida, String username, int enemigosMatados, int tiempo, int monedasRecogidas, int puntuacionFinal) {
         this.idPartida = idPartida;
         this.username = username;
         this.enemigosMatados = enemigosMatados;

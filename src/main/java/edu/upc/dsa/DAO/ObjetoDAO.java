@@ -11,7 +11,7 @@ public interface ObjetoDAO {
     List<Objeto> readAll();
     Objeto readByParameter(String parameter, Object value);
 
-    boolean existsByParameter(String nombre);
+    boolean exists(String nombre);
 
     boolean update(Objeto objeto);
     boolean updateByParameter(Objeto objeto, String parameter, Object value);

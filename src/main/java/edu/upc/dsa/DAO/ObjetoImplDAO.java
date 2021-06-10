@@ -56,8 +56,11 @@ public class ObjetoImplDAO implements ObjetoDAO{
     }
 
     @Override
-    public boolean existsByParameter(String nombre) {
-        return (session.readByParameter(Objeto.class, "nombre", nombre) != null);
+    public boolean exists(String nombre) {
+        if (session.readByParameter(Objeto.class, "nombre", nombre) == null)
+            return false;
+        else
+            return true;
     }
 
     @Override

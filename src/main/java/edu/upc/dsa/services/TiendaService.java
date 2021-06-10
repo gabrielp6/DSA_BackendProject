@@ -88,7 +88,7 @@ public class TiendaService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response comprarObjeto(@PathParam("nombre") String nombre, @QueryParam("username") String username){
 
-        if(objetoDAO.existsByParameter(nombre)) {
+        if(objetoDAO.exists(nombre)) {
 
             Objeto objeto = objetoDAO.readByParameter("nombre", nombre);
             Usuario usuario = usuarioDAO.readByParameter("username", username);

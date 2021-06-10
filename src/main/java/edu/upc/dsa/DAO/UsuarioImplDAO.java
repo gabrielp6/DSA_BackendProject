@@ -67,12 +67,19 @@ public class UsuarioImplDAO implements UsuarioDAO{
 
     @Override
     public boolean exists(String username) {
-        return (session.readByParameter(Usuario.class, "username", username) != null);
+
+        if (session.readByParameter(Usuario.class, "username", username) == null)
+            return false;
+        else
+            return true;
     }
 
     @Override
     public boolean existsEmail(String email) {
-        return (session.readByParameter(Usuario.class, "email", email) != null);
+        if (session.readByParameter(Usuario.class, "email", email) == null)
+            return false;
+        else
+            return true;
     }
 
     @Override
