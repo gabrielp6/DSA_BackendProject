@@ -10,16 +10,19 @@ public class QueryHelper {
 
         String [] fields = ObjectHelper.getFields(entity);
 
-        sb.append("ID");
-        for (String field: fields) {
-            sb.append(", ").append(field);
-        }
-
-        sb.append(") VALUES (?");
+        //sb.append("ID");
 
         for (String field: fields) {
-            sb.append(", ?");
+            sb.append(field+",");
         }
+        sb.deleteCharAt(sb.length()-1);
+
+        sb.append(") VALUES (");
+
+        for (String field: fields) {
+            sb.append("?,");
+        }
+        sb.deleteCharAt(sb.length()-1);
 
         sb.append(")");
 

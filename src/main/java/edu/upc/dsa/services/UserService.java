@@ -1,7 +1,9 @@
 package edu.upc.dsa.services;
+import edu.upc.dsa.DAO.InventarioDAO;
 import edu.upc.dsa.DAO.UsuarioDAO;
 import edu.upc.dsa.DAO.UsuarioImplDAO;
 import edu.upc.dsa.GameManagerImpl;
+import edu.upc.dsa.models.Inventario;
 import edu.upc.dsa.models.Usuario;
 
 import io.swagger.annotations.*;
@@ -23,6 +25,7 @@ public class UserService {
 
     private final GameManagerImpl gm;
     private final UsuarioDAO usuarioDAO;
+
 
     public UserService() {
         this.gm = GameManagerImpl.getInstance();

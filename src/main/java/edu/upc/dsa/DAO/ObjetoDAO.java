@@ -16,7 +16,7 @@ public interface ObjetoDAO {
     boolean update(Objeto objeto);
     boolean updateByParameter(Objeto objeto, String parameter, Object value);
 
-    //para consumir en un usuario??
+
     boolean delete(Objeto objeto);
     boolean deleteByParameter(String parameter, Object value);
 

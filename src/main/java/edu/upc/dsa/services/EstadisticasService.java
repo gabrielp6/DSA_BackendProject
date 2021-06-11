@@ -1,9 +1,7 @@
 package edu.upc.dsa.services;
 import edu.upc.dsa.DAO.*;
 import edu.upc.dsa.GameManagerImpl;
-import edu.upc.dsa.models.Partida;
-import edu.upc.dsa.models.RecordUsuario;
-import edu.upc.dsa.models.Usuario;
+import edu.upc.dsa.models.*;
 
 import io.swagger.annotations.*;
 
@@ -41,6 +39,30 @@ public class EstadisticasService {
     }
 
 
+
+    @POST
+    @ApiOperation(value = "añadimos partida", notes = "No notes")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful", response = Usuario.class),
+            @ApiResponse(code = 404, message = "Usuario ya existente"),
+            @ApiResponse(code = 500, message = "Validation Error")
+
+    })
+
+    @Path("/añadirPartida")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registrarUsuario(CredentialsPartida credentialsPartida) {
+
+        Partida partida = new Partida(credentialsPartida.getUsername(), credentialsPartida.getEnemigosMatados(), credentialsPartida.getMonedasRecogidas(), credentialsPartida.getTiempo());
+        if (credentialsPartida.getUsername() == null)
+            return Response.status(500).build();
+        else {
+            partidaDAO.create(partida);
+            return Response.status(200).entity(partida).build();
+            }
+    }
+
+
     @GET
     @ApiOperation(value = "Todas las partidas jugadas")
     @ApiResponses(value = {
@@ -71,7 +93,7 @@ public class EstadisticasService {
             @ApiResponse(code = 200, message = "Successful", response = Partida.class, responseContainer="List"),
             @ApiResponse(code = 404, message = "Usuario no encontrado")
     })
-    @Path("/{username}/game")
+    @Path("/partidasUsuario/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPartidasUsuario(@PathParam("username") String username) {
 
@@ -94,7 +116,7 @@ public class EstadisticasService {
             @ApiResponse(code = 200, message = "Successful", response = Partida.class, responseContainer="List"),
             @ApiResponse(code = 404, message = "Usuario no encontrado")
     })
-    @Path("/{username}/game")
+    @Path("/recordUsuario/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecordUsuario(@PathParam("username") String username) {
 
@@ -117,7 +139,7 @@ public class EstadisticasService {
             @ApiResponse(code = 200, message = "Successful", response = Partida.class, responseContainer="List"),
             @ApiResponse(code = 404, message = "Resultados no encontrados")
     })
-    @Path("/{username}/game")
+    @Path("/records")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecords() {
 

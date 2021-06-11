@@ -1,38 +1,46 @@
 package edu.upc.dsa.models;
 
-import java.util.List;
+import edu.upc.dsa.util.RandomUtils;
 
 public class Usuario {
 
+    String ID;
     String username;
     String password;
     String email;
+    int vida;
+    int fuerza;
     int coins;
-
-    List<Objeto> listaObjetos;
-    List<Partida> listaPartidas;
 
 
     public Usuario() {
     }
 
 
-    public Usuario(String username, String password, String email, int coins) {
+    public Usuario(String username, String password, String email) {
+        this.ID = RandomUtils.getId();
         this.username = username;
         this.password = password;
         this.email = email;
-        this.coins = coins;
+        this.vida = 100;
+        this.fuerza = 3;
+        this.coins = 50;
     }
 
-    public Usuario(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
+
 
     public Usuario(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getUsername() {
@@ -63,23 +71,32 @@ public class Usuario {
         this.coins = coins;
     }
 
-    public List<Objeto> getListaObjetos() {
-        return listaObjetos;
+    public int getVida() {
+        return vida;
     }
 
-    public void setListaObjetos(List<Objeto> listaObjetos) {
-        this.listaObjetos = listaObjetos;
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getFuerza() {
+        return fuerza;
+    }
+
+    public void setFuerza(int fuerza) {
+        this.fuerza = fuerza;
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "username='" + username + '\'' +
+                "ID='" + ID + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", vida=" + vida +
+                ", fuerza=" + fuerza +
                 ", coins=" + coins +
-                ", listaObjetos=" + listaObjetos +
-                ", listaPartidas=" + listaPartidas +
                 '}';
     }
 }

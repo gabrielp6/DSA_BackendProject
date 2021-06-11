@@ -62,7 +62,7 @@ public class InventarioManagerImpl implements InventarioManager{
 
     @Override
     public List<Objeto> mostrarObjetosUsuario(Usuario usuario) {
-        return usuario.getListaObjetos();
+        return null;
     }
 
     @Override

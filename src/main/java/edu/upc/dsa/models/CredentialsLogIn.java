@@ -2,19 +2,18 @@ package edu.upc.dsa.models;
 
 import java.util.List;
 
-public class Credentials {
+public class CredentialsLogIn {
 
     String username;
     String password;
-    int id;
 
 
 
-    public Credentials() {
+    public CredentialsLogIn() {
     }
 
 
-    public Credentials(String username, String password) {
+    public CredentialsLogIn(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -33,13 +32,5 @@ public class Credentials {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

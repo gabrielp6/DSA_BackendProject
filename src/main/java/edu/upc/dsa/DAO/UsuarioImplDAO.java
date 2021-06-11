@@ -2,10 +2,8 @@ package edu.upc.dsa.DAO;
 
 import edu.upc.dsa.FactorySession;
 import edu.upc.dsa.Session;
-import edu.upc.dsa.models.Credentials;
 import edu.upc.dsa.models.Usuario;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

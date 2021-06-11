@@ -50,9 +50,12 @@ public class SessionImpl implements Session {
 
             int i = 1;
             for (String field : ObjectHelper.getFields(object)) {
+                System.out.println(i+" "+field);
                 pstm.setObject(i++, ObjectHelper.getter(object, field));
+
             }
 
+            System.out.println(insertQuery);
             pstm.executeQuery();
 
             return true;

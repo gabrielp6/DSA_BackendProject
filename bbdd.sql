@@ -6,6 +6,7 @@ USE bbdd;
 
 CREATE TABLE Usuario(
 
+    ID VARCHAR(30),
 	username VARCHAR(30) PRIMARY KEY NOT NULL,
 	password VARCHAR(30),
 	email VARCHAR(50),
@@ -16,22 +17,28 @@ CREATE TABLE Usuario(
 )ENGINE = InnoDB;
 
 
-CREATE TABLE compras(
+CREATE TABLE Inventario(
 
-    username VARCHAR(30),
-    nameObjeto VARCHAR(30),
-    FOREIGN KEY (username) REFERENCES usuario(username),
-    FOREIGN KEY (nameObjeto) REFERENCES objeto(name)
+    String username VARCHAR(30),
+    escudoMaderaComprado INT,
+    escudoPlataComprado INT,
+    escudoOroComprado INT,
+    flechaMaderaComprada INT,
+    flechaPlataComprada INT,
+    flechaOroComprada INT,
+    manzanaComprada INT,
+    pocionAzulComprada INT,
+    pocionRojaComprada INT
 
 )ENGINE = InnoDB;
 
 
 CREATE TABLE Objeto(
-	name VARCHAR(30),
-	cost INT,
-	idUser VARCHAR,
-	healthPointsAdded INT,
-	attackedPointsAdded INT
+
+	nombre VARCHAR(30),
+	coste INT,
+    descripcion VARCHAR(100),
+    avatar VARCHAR(100)
 
 )ENGINE = InnoDB;
 

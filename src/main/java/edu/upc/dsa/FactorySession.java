@@ -19,7 +19,7 @@ public class FactorySession {
     private static Connection getConnection() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" + "user=minty&password=greatsqldb");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/prueba?" + "user=root&password=dsaproyecto");
 
         } catch (SQLException ex) {
             // handle any errors
