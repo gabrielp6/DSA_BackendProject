@@ -2,7 +2,7 @@ var BASE_URI = "http://localhost:8080/dsaApp"
 
 $(document).ready(function(){
 
-   $("#btnIniciarSesion").click(function(e){
+   $("#btnIniciarSesion").click(function(){
        e.preventDefault();
        var username = $('#username').val();
        var password = $('#password').val();
