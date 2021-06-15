@@ -66,7 +66,7 @@ public class UsuarioImplDAO implements UsuarioDAO{
     @Override
     public boolean exists(String username) {
 
-        if (session.readByParameter(Usuario.class, "username", username) == null)
+        if (session.readParameterByParameter(Usuario.class, "username", "username", username) == null)
             return false;
         else
             return true;
@@ -82,7 +82,7 @@ public class UsuarioImplDAO implements UsuarioDAO{
 
     @Override
     public boolean readPassword(String username, String password) {
-        String passwordUsuario = (String) readParameterByParameter("password", "username", username);
+        String passwordUsuario = (String) session.readParameterByParameter(Usuario.class, "password", "username", username);
         if (password.equals(passwordUsuario))
             return true;
         else

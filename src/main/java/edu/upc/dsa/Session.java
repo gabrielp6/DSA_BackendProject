@@ -22,6 +22,7 @@ public interface Session<E> {
     boolean delete(Object object);
     boolean deleteByParameter(Class theClass, String byParameter, Object byParameterValue);
 
+    List<Object> queryObjects(String query, Class theClass, List params);
 
     HashMap<Integer, Object> readAll(Class theClass);
     HashMap<Integer, Object> readAllByParameter(Class theClass, String byParameter, Object byParameterValue);

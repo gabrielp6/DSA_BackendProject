@@ -3,6 +3,7 @@ package edu.upc.dsa.DAO;
 import edu.upc.dsa.FactorySession;
 import edu.upc.dsa.Session;
 import edu.upc.dsa.models.Inventario;
+import edu.upc.dsa.models.Usuario;
 import io.swagger.models.auth.In;
 
 public class InventarioImplDAO implements InventarioDAO{
@@ -28,6 +29,11 @@ public class InventarioImplDAO implements InventarioDAO{
     @Override
     public Inventario readByParameter(String parameter, Object value) {
         return ((Inventario) session.readByParameter(Inventario.class, parameter, value));
+    }
+
+    @Override
+    public Object readParameterByParameter(String parameter, String byParameter, Object value) {
+        return session.readParameterByParameter(Usuario.class, parameter, byParameter, value);
     }
 
     @Override

@@ -52,7 +52,7 @@ public class AuthenticationService {
 
         Usuario usuario = new Usuario(credentialsRegister.getUsername(), credentialsRegister.getPassword(), credentialsRegister.getEmail());
         Inventario inventario = new Inventario(credentialsRegister.getUsername());
-        if (credentialsRegister.getUsername() == null || credentialsRegister.getEmail() == null || credentialsRegister.getPassword() == null)
+        if (credentialsRegister.getUsername().isEmpty() || credentialsRegister.getEmail().isEmpty() || credentialsRegister.getPassword().isEmpty())
             return Response.status(500).build();
         else {
             if (usuarioDAO.exists(credentialsRegister.getUsername()) || usuarioDAO.existsEmail(credentialsRegister.getEmail())) {
@@ -72,19 +72,19 @@ public class AuthenticationService {
             @ApiResponse(code = 200, message = "Successful", response = Usuario.class),
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 405, message = "Nombre y contraseña no coinciden"),
-            @ApiResponse(code = 400, message = "Campos necesarios vacíos")
+            @ApiResponse(code = 500, message = "Campos necesarios vacíos")
     })
     @Path("/auth/iniciarSesion")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response iniciarSesion(CredentialsLogIn credentialsLogIn) {
-        
-        if ((credentialsLogIn.getUsername() == null) || (credentialsLogIn.getPassword() == null)) {
-            return Response.status(400).build();
+        Usuario usuarioLogeado = new Usuario(credentialsLogIn.getUsername(), credentialsLogIn.getPassword());
+        if ((credentialsLogIn.getUsername().isEmpty()) || (credentialsLogIn.getPassword().isEmpty())) {
+            return Response.status(500).build();
         }
 
         if (usuarioDAO.exists(credentialsLogIn.getUsername())){
             if (usuarioDAO.readPassword(credentialsLogIn.getUsername(), credentialsLogIn.getPassword())) {
-                return Response.status(200).build();
+                return Response.status(200).entity(usuarioLogeado).build();
             }
             else
                 return Response.status(405).build();

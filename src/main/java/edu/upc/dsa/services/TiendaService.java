@@ -43,8 +43,7 @@ public class TiendaService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllObjetos() {
 
-
-        List<Objeto> listaObjetos = objetoDAO.readAll();
+        List<Objeto> listaObjetos = objetoDAO.getAllObject();
         GenericEntity<List<Objeto>> entity = new GenericEntity<List<Objeto>>(listaObjetos) {};
         return Response.status(200).entity(entity).build();
 
@@ -89,21 +88,21 @@ public class TiendaService {
     @GET //obtener inventario de un usuario
     @ApiOperation(value = "obtener inventario de un usuario", notes = "No")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Usuario.class),
+            @ApiResponse(code = 200, message = "Successful", response = Usuario.class),
             @ApiResponse(code = 404, message = "Usuario no encontrado")
     })
-    @Path("/obtenerInventarioUsuario/{username}")
+    @Path("/obtenerInventarioUsuario")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getInventarioUsuario(@PathParam("username") String username) {
-
-        Inventario inventario = inventarioDAO.readByParameter("username", username);
+    public Response getInventarioUsuario() {
+        Inventario inventario = new Inventario();
+        inventario = inventarioDAO.readByParameter("username", inventario.getUsername());
 
         if(inventario == null){
             return Response.status(404).build();
         }
         else {
             GenericEntity<Inventario> entity = new GenericEntity<Inventario>(inventario) {};
-            return Response.status(201).entity(entity).build();
+            return Response.status(200).entity(entity).build();
         }
     }
 

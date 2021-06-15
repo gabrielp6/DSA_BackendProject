@@ -11,6 +11,7 @@ public interface InventarioDAO {
     boolean create(Inventario inventario);
 
     Inventario readByParameter(String parameter, Object value);
+    Object readParameterByParameter(String parameter, String byParameter, Object value);
 
     boolean update(Inventario inventario);
     boolean updateByParameter(Inventario inventario, String parameter, Object value);

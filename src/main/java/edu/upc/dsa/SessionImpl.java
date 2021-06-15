@@ -2,15 +2,19 @@ package edu.upc.dsa;
 
 import edu.upc.dsa.util.ObjectHelper;
 import edu.upc.dsa.util.QueryHelper;
+import java.util.logging.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class SessionImpl implements Session {
     private final Connection conn;
+    static final Logger logger = Logger.getLogger(SessionImpl.class.getName());
+
 
     public SessionImpl(Connection conn) {
         this.conn = conn;
@@ -266,7 +270,6 @@ public class SessionImpl implements Session {
     public HashMap<Integer, Object> readAll(Class theClass) {           //obtener todos (aplicable a todas las funciones)
 
         try {
-
             HashMap<Integer, Object> result = new HashMap<>();
             String selectQuery = QueryHelper.createQuerySELECTall(theClass);
             PreparedStatement pstm;
@@ -336,5 +339,38 @@ public class SessionImpl implements Session {
             return null;
 
         }
+    }
+
+    @Override
+    public List<Object> queryObjects(String query, Class theClass, List params) {
+        PreparedStatement pstm = null;
+        List<Object> objResultado = new LinkedList<>();
+        Object obj = null;
+        try{
+            obj = theClass.newInstance();
+            pstm = conn.prepareStatement(query);
+            int i = 1;
+            for(Object o: params){
+                pstm.setObject(i, params.get(i-1));
+                i++;
+            }
+
+            ResultSet resultSet = pstm.executeQuery();
+            while(resultSet.next()) {
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                for(int j=1;j<=resultSetMetaData.getColumnCount();j++){
+                    String name = resultSetMetaData.getColumnName(j);
+                    ObjectHelper.setter(obj,name, resultSet.getObject(j));
+
+                }
+                logger.info("objeto añadido " +obj);
+                objResultado.add(obj);
+                obj = theClass.newInstance();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return objResultado;
     }
 }

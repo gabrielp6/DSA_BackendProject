@@ -12,6 +12,9 @@ public class Inventario {
     int pocionAzulComprada;
     int pocionRojaComprada;
 
+    public Inventario(){
+
+    }
     public Inventario(String username) {
         this.username = username;
         this.escudoMaderaComprado = 0;
