@@ -20,15 +20,15 @@ CREATE TABLE Usuario(
 CREATE TABLE Inventario(
 
     username VARCHAR(30),
-    escudoMaderaComprado INT,
-    escudoPlataComprado INT,
-    escudoOroComprado INT,
-    flechaMaderaComprada INT,
-    flechaPlataComprada INT,
-    flechaOroComprada INT,
-    manzanaComprada INT,
-    pocionAzulComprada INT,
-    pocionRojaComprada INT
+    escudoMadera INT,
+    escudoPlata INT,
+    escudoOro INT,
+    flechaMadera INT,
+    flechaPlata INT,
+    flechaOro INT,
+    manzana INT,
+    pocionAzul INT,
+    pocionRoja INT
 
 )ENGINE = InnoDB;
 
@@ -52,17 +52,20 @@ INSERT INTO Objeto (nombre, coste, descripcion, avatar) values ("manzana", 10, "
 INSERT INTO Objeto (nombre, coste, descripcion, avatar) values ("pocionAzul", 50, "Aumenta tu vida al máximo de la capacidad de tu personaje", "imagenes/pocionAzul.jpeg");
 INSERT INTO Objeto (nombre, coste, descripcion, avatar) values ("pocionRoja", 20, "Pone a 100 de vida a tu personaje. ¡Vigila cuando tienes que usarla!", "imagenes/pocionRoja.jpeg");
 
+CREATE TABLE Partida(
+   	username VARCHAR(30),
+	enemigosMatados INT,
+	tiempo INT,
+	monedasRecogidas INT,
+	puntuacionFinal INT
 
-CREATE TABLE Mapa(
-
-	nameMap VARCHAR(30)
 )ENGINE = InnoDB;
 
-
-CREATE TABLE Partida(
-   	usuario VARCHAR(30),
+CREATE TABLE RecordUsuario(
+   	username VARCHAR(30),
+	enemigosMatados INT,
 	tiempo INT,
-	monedasrecogidas INT,
-	enemigosmatados INT,
-	FOREIGN KEY (usuario) REFERENCES usuario(username)
-)ENGINE = InnoDB
+	monedasRecogidas INT,
+	puntuacionFinal INT
+
+)ENGINE = InnoDB;

@@ -2,11 +2,13 @@ package edu.upc.dsa.DAO;
 
 import edu.upc.dsa.FactorySession;
 import edu.upc.dsa.Session;
+import edu.upc.dsa.models.Objeto;
 import edu.upc.dsa.models.Partida;
 import edu.upc.dsa.models.RecordUsuario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RecordUsuarioImplDAO implements RecordUsuarioDAO {
@@ -48,6 +50,33 @@ public class RecordUsuarioImplDAO implements RecordUsuarioDAO {
 
         session.close();
         return listaRecords;
+    }
+
+    @Override
+    public List<RecordUsuario> getAll() {
+
+            Session session = null;
+            List<RecordUsuario> listaRecords = null;
+
+
+            try{
+                List<String> params= new LinkedList<>();
+                String query = "SELECT * FROM RecordUsuario;";
+                session = FactorySession.openSession();
+                //String query = "SELECT * FROM objetos";
+                listaRecords = (List) session.queryObjects(query, RecordUsuario.class, params);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+
+            }
+            finally {
+                if(session!=null){
+                    session.close();
+                }
+            }
+            return listaRecords;
+
     }
 
     @Override

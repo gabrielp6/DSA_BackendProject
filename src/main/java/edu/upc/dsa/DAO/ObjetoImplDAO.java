@@ -41,15 +41,15 @@ public class ObjetoImplDAO implements ObjetoDAO{
         Session session;
         List<Objeto> listaObjetos;
 
-        HashMap<Integer, Objeto> result;
+        HashMap<Integer, Object> result;
 
         session = FactorySession.openSession();
         result = session.readAll(Objeto.class);
 
         listaObjetos = new ArrayList<>();
 
-        for (Objeto objeto : result.values()) {
-            listaObjetos.add((Objeto) objeto);
+        for (Object object : result.values()) {
+            listaObjetos.add((Objeto) object);
         }
 
         session.close();
@@ -81,7 +81,6 @@ public class ObjetoImplDAO implements ObjetoDAO{
             }
         }
         return objetosList;
-
     }
 
     @Override

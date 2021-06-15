@@ -43,21 +43,26 @@ public class EstadisticasService {
     @POST
     @ApiOperation(value = "añadimos partida", notes = "No notes")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response = Usuario.class),
-            @ApiResponse(code = 404, message = "Usuario ya existente"),
+            @ApiResponse(code = 200, message = "Successful", response = Partida.class),
             @ApiResponse(code = 500, message = "Validation Error")
 
     })
 
     @Path("/añadirPartida")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarUsuario(CredentialsPartida credentialsPartida) {
+    public Response registrarPartida(CredentialsPartida credentialsPartida) {
 
-        Partida partida = new Partida(credentialsPartida.getUsername(), credentialsPartida.getEnemigosMatados(), credentialsPartida.getMonedasRecogidas(), credentialsPartida.getTiempo());
+        Partida partida = new Partida(credentialsPartida.getUsername(), credentialsPartida.getEnemigosMatados(), credentialsPartida.getTiempo(), credentialsPartida.getMonedasRecogidas());
         if (credentialsPartida.getUsername() == null)
             return Response.status(500).build();
         else {
             partidaDAO.create(partida);
+            /*RecordUsuario recordUsuario = recordDAO.readByParameter("username", partida.getUsername());
+            if(partida.getPuntuacionFinal() > recordUsuario.getPuntuacionFinal()){
+                recordDAO.delete(recordUsuario);
+                RecordUsuario nuevoRecord = new RecordUsuario(partida.getUsername(), partida.getEnemigosMatados(), partida.getTiempo(), partida.getMonedasRecogidas(), partida.getPuntuacionFinal());
+                recordDAO.create(nuevoRecord);
+            }*/
             return Response.status(200).entity(partida).build();
             }
     }
@@ -66,24 +71,18 @@ public class EstadisticasService {
     @GET
     @ApiOperation(value = "Todas las partidas jugadas")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response = Partida.class, responseContainer="List"),
-            @ApiResponse(code = 404, message = "No hay partidas")
+            @ApiResponse(code = 200, message = "Successful", response = Partida.class, responseContainer="List")
     })
     @Path("/todasPartidas")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPartidas() {
 
-        List<Partida> listaPartidas = partidaDAO.readAll();
+        List<Partida> listaPartidas = partidaDAO.getAllPartida();
 
-        if (listaPartidas == null){
-            return Response.status(404).build();
-        }
-
-        else {
-            GenericEntity<List<Partida>> entity = new GenericEntity<List<Partida>>(listaPartidas) {};
-            return Response.status(200).entity(entity).build();
-        }
+        GenericEntity<List<Partida>> entity = new GenericEntity<List<Partida>>(listaPartidas) {};
+        return Response.status(200).entity(entity).build();
     }
+
 
 
 
@@ -136,14 +135,14 @@ public class EstadisticasService {
     @GET //Es una lista con la mejor partida de cada uno
     @ApiOperation(value = "Records de cada jugador")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response = Partida.class, responseContainer="List"),
+            @ApiResponse(code = 200, message = "Successful", response = RecordUsuario.class, responseContainer="List"),
             @ApiResponse(code = 404, message = "Resultados no encontrados")
     })
     @Path("/records")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecords() {
 
-        List<RecordUsuario> listaRecords = recordDAO.readAll();
+        List<RecordUsuario> listaRecords = recordDAO.getAll();
 
         if (listaRecords == null) {
             return Response.status(404).build();

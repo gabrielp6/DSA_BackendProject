@@ -1,13 +1,7 @@
 package edu.upc.dsa.services;
-import edu.upc.dsa.DAO.InventarioDAO;
-import edu.upc.dsa.DAO.InventarioImplDAO;
-import edu.upc.dsa.DAO.UsuarioDAO;
-import edu.upc.dsa.DAO.UsuarioImplDAO;
+import edu.upc.dsa.DAO.*;
 import edu.upc.dsa.GameManagerImpl;
-import edu.upc.dsa.models.CredentialsLogIn;
-import edu.upc.dsa.models.CredentialsRegister;
-import edu.upc.dsa.models.Inventario;
-import edu.upc.dsa.models.Usuario;
+import edu.upc.dsa.models.*;
 
 import io.swagger.annotations.*;
 
@@ -24,11 +18,13 @@ public class AuthenticationService {
     private final GameManagerImpl gm;
     private UsuarioDAO usuarioDAO;
     private InventarioDAO inventarioDAO;
+    private RecordUsuarioDAO recordUsuarioDAO;
 
     public AuthenticationService() {
         this.gm = GameManagerImpl.getInstance();
         this.usuarioDAO = UsuarioImplDAO.getInstance();
         this.inventarioDAO = InventarioImplDAO.getInstance();
+        this.recordUsuarioDAO = RecordUsuarioImplDAO.getInstance();
         if (gm.usuariosSize() == 0) {
             gm.registrar("toni11", "hola", "toni11@hotmail.com");
             gm.registrar("juan6", "quetal", "juan6@gmail.com");
@@ -52,6 +48,7 @@ public class AuthenticationService {
 
         Usuario usuario = new Usuario(credentialsRegister.getUsername(), credentialsRegister.getPassword(), credentialsRegister.getEmail());
         Inventario inventario = new Inventario(credentialsRegister.getUsername());
+        RecordUsuario recordUsuario = new RecordUsuario(credentialsRegister.getUsername(), 0, 0, 0, 0);
         if (credentialsRegister.getUsername().isEmpty() || credentialsRegister.getEmail().isEmpty() || credentialsRegister.getPassword().isEmpty())
             return Response.status(500).build();
         else {
@@ -60,6 +57,7 @@ public class AuthenticationService {
             } else {
                 usuarioDAO.create(usuario);
                 inventarioDAO.create(inventario);
+                recordUsuarioDAO.create(recordUsuario);
                 return Response.status(200).entity(usuario).build();
             }
         }
@@ -77,14 +75,15 @@ public class AuthenticationService {
     @Path("/auth/iniciarSesion")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response iniciarSesion(CredentialsLogIn credentialsLogIn) {
-        Usuario usuarioLogeado = new Usuario(credentialsLogIn.getUsername(), credentialsLogIn.getPassword());
+        String username = credentialsLogIn.getUsername();
+        Usuario usuario = usuarioDAO.readByParameter("username", username);
         if ((credentialsLogIn.getUsername().isEmpty()) || (credentialsLogIn.getPassword().isEmpty())) {
             return Response.status(500).build();
         }
 
         if (usuarioDAO.exists(credentialsLogIn.getUsername())){
             if (usuarioDAO.readPassword(credentialsLogIn.getUsername(), credentialsLogIn.getPassword())) {
-                return Response.status(200).entity(usuarioLogeado).build();
+                return Response.status(200).entity(usuario).build();
             }
             else
                 return Response.status(405).build();

@@ -41,37 +41,26 @@ public class UserService {
 
 
     @GET // Obtener lista de usuarios registrados
-    @ApiOperation(value = "Lista de usuarios", notes = "Lista de usuarios")
+    @ApiOperation(value = "Lista de usuarios")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response= Usuario.class ,responseContainer = "List"),
-            @ApiResponse(code = 404, message = "No hay usuarios")
+            @ApiResponse(code = 200, message = "Successful", response= Usuario.class ,responseContainer = "List")
     })
     @Path("/listaUsuarios")
-    public Response orderLista() {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllUsuarios() {
 
-        List<Usuario> listaUsuarios = usuarioDAO.readAll();
+        List<Usuario> listaUsuarios = usuarioDAO.getAll();
 
-        if(listaUsuarios == null){
-            return Response.status(404).build();
-        }
-        else {
-            GenericEntity<List<Usuario>> entity = new GenericEntity<List<Usuario>>(listaUsuarios) {};
-            return Response.status(201).entity(entity).build();
-        }
+        GenericEntity<List<Usuario>> entity = new GenericEntity<List<Usuario>>(listaUsuarios) {};
+        return Response.status(200).entity(entity).build();
 
-        /*
-        List<Usuario> usersList = this.gm.getSortedUsersList();
-        GenericEntity<List<Usuario>> entity = new GenericEntity<List<Usuario>>(usersList) {};
-        return Response.status(201).entity(entity).build();
-
-         */
     }
 
 
     @DELETE //Borrar usuario
     @ApiOperation(value = "Borrar Usuario", notes = "No")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful"),
+            @ApiResponse(code = 200, message = "Successful"),
             @ApiResponse(code = 404, message = "Usuarrio Not Found")
     })
     @Path("/borrarUsuario/{username}")
@@ -87,18 +76,13 @@ public class UserService {
         else {
             return Response.status(404).build();
         }
-
-        /*
-        int usuario = this.gm.borrarUsuario(user.getUsername());
-        if(usuario == 0) return Response.status(404).build();
-         */
     }
 
 
     @GET //obtener un usuario
     @ApiOperation(value = "obtener usuario", notes = "No")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Usuario.class),
+            @ApiResponse(code = 200, message = "Successful", response = Usuario.class),
             @ApiResponse(code = 404, message = "Usuario no encontrado")
     })
     @Path("/obtenerUsuario/{username}")
@@ -112,7 +96,7 @@ public class UserService {
         }
         else {
             GenericEntity<Usuario> entity = new GenericEntity<Usuario>(usuario) {};
-            return Response.status(201).entity(entity).build();
+            return Response.status(200).entity(entity).build();
         }
         /*
         Usuario u = this.gm.getUser(username);

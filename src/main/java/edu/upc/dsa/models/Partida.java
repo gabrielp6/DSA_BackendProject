@@ -4,7 +4,6 @@ import edu.upc.dsa.util.RandomUtils;
 
 public class Partida {
 
-    String idPartida;
     String username;
     int enemigosMatados;
     int tiempo;
@@ -15,22 +14,13 @@ public class Partida {
     }
 
     public Partida(String username, int enemigosMatados, int tiempo, int monedasRecogidas) {
-        this.idPartida = RandomUtils.getId();
         this.username = username;
         this.enemigosMatados = enemigosMatados;
         this.tiempo = tiempo;
         this.monedasRecogidas = monedasRecogidas;
-        //EJEMPLO!!! :
-        this.puntuacionFinal = enemigosMatados*10 + monedasRecogidas*5 + (1000-tiempo);
+        this.puntuacionFinal = (enemigosMatados*20 + monedasRecogidas*5 + (800-tiempo));
     }
 
-    public String getIdPartida() {
-        return idPartida;
-    }
-
-    public void setIdPartida(String idPartida) {
-        this.idPartida = idPartida;
-    }
 
     public String getUsername() {
         return username;

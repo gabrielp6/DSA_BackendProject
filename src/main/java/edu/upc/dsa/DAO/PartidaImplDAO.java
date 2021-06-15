@@ -2,10 +2,12 @@ package edu.upc.dsa.DAO;
 
 import edu.upc.dsa.FactorySession;
 import edu.upc.dsa.Session;
+import edu.upc.dsa.models.Objeto;
 import edu.upc.dsa.models.Partida;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PartidaImplDAO implements PartidaDAO {
@@ -75,6 +77,33 @@ public class PartidaImplDAO implements PartidaDAO {
     @Override
     public Partida readByParameter(String parameter, Object value) {
         return ((Partida) session.readByParameter(Partida.class, parameter, value));
+    }
+
+    @Override
+    public List<Partida> getAllPartida() {
+
+            Session session = null;
+            List<Partida> listaPartida = null;
+
+
+            try{
+                List<String> params= new LinkedList<>();
+                String query = "SELECT * FROM Partida;";
+                session = FactorySession.openSession();
+                //String query = "SELECT * FROM objetos";
+                listaPartida = (List) session.queryObjects(query, Partida.class, params);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+
+            }
+            finally {
+                if(session!=null){
+                    session.close();
+                }
+            }
+            return listaPartida;
+
     }
 
     @Override

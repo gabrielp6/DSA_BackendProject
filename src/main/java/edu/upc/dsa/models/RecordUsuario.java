@@ -2,7 +2,6 @@ package edu.upc.dsa.models;
 
 public class RecordUsuario {
 
-    int idPartida;
     String username;
     int enemigosMatados;
     int tiempo;
@@ -12,8 +11,7 @@ public class RecordUsuario {
     public RecordUsuario() {
     }
 
-    public RecordUsuario(int idPartida, String username, int enemigosMatados, int tiempo, int monedasRecogidas, int puntuacionFinal) {
-        this.idPartida = idPartida;
+    public RecordUsuario(String username, int enemigosMatados, int tiempo, int monedasRecogidas, int puntuacionFinal) {
         this.username = username;
         this.enemigosMatados = enemigosMatados;
         this.tiempo = tiempo;
@@ -21,13 +19,6 @@ public class RecordUsuario {
         this.puntuacionFinal = puntuacionFinal;
     }
 
-    public int getIdPartida() {
-        return idPartida;
-    }
-
-    public void setIdPartida(int idPartida) {
-        this.idPartida = idPartida;
-    }
 
     public String getUsername() {
         return username;
