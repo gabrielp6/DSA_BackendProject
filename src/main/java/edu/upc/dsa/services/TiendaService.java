@@ -53,7 +53,7 @@ public class TiendaService {
     @POST //Comprar objeto
     @ApiOperation(value = "comprar objeto", notes = "No")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Objeto.class),
+            @ApiResponse(code = 200, message = "Successful"),
             @ApiResponse(code = 402, message = "No tienes suficiente dinero"),
             @ApiResponse(code = 404, message = "Not found"),
     })
@@ -71,7 +71,42 @@ public class TiendaService {
                 return Response.status(402).build();
             }
             else{
-                //falta actualizar el inventario!
+                int suma=0;
+                if(nombre == "escudoOro") {
+                    suma = inventario.getEscudoOro() + 1;
+                    usuarioDAO.updateParameterByParameter("vida", usuario.getVida()+50, "username", username);
+                }
+                if(nombre == "escudoPlata") {
+                    suma = inventario.getEscudoPlata() + 1;
+                    usuarioDAO.updateParameterByParameter("vida", usuario.getVida()+20, "username", username);
+                }
+                if(nombre == "escudoMadera") {
+                    suma = inventario.getEscudoMadera() + 1;
+                    usuarioDAO.updateParameterByParameter("vida", usuario.getVida()+10, "username", username);
+                }
+                if(nombre == "flechaOro") {
+                    suma = inventario.getFlechaOro() + 1;
+                    usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza()+5, "username", username);
+                }
+                if(nombre == "flechaPlata") {
+                    suma = inventario.getFlechaPlata() + 1;
+                    usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza()+3, "username", username);
+                }
+                if(nombre == "flechaMadera") {
+                    suma = inventario.getFlechaMadera() + 1;
+                    usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza()+1, "username", username);
+                }
+                if(nombre == "manzana") {
+                    suma = inventario.getManzana() + 1;
+                }
+                if(nombre == "pocionRoja") {
+                    suma = inventario.getPocionRoja() + 1;
+                }
+                if(nombre == "pocionAzul") {
+                    suma = inventario.getPocionAzul() + 1;
+                }
+
+                inventarioDAO.updateParameterByParameter(nombre, suma,"username", username);
                 int monedasActualizadas = usuario.getCoins()-objeto.getCoste();
                 usuarioDAO.updateParameterByParameter("coins", monedasActualizadas, "username", username);
                 return Response.status(200).build();
@@ -88,14 +123,14 @@ public class TiendaService {
     @GET //obtener inventario de un usuario
     @ApiOperation(value = "obtener inventario de un usuario", notes = "No")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successful", response = Usuario.class),
+            @ApiResponse(code = 200, message = "Successful", response = Inventario.class),
             @ApiResponse(code = 404, message = "Usuario no encontrado")
     })
-    @Path("/obtenerInventarioUsuario")
+    @Path("/obtenerInventarioUsuario/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getInventarioUsuario() {
-        Inventario inventario = new Inventario();
-        inventario = inventarioDAO.readByParameter("username", inventario.getUsername());
+    public Response getInventarioUsuario(@PathParam("username") String username) {
+
+        Inventario inventario = inventarioDAO.readByParameter("username", username);
 
         if(inventario == null){
             return Response.status(404).build();

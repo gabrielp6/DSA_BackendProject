@@ -2,30 +2,30 @@ package edu.upc.dsa.models;
 
 public class Inventario {
     String username;
-    int escudoMaderaComprado;
-    int escudoPlataComprado;
-    int escudoOroComprado;
-    int flechaMaderaComprada;
-    int flechaPlataComprada;
-    int flechaOroComprada;
-    int manzanaComprada;
-    int pocionAzulComprada;
-    int pocionRojaComprada;
+    int escudoMadera;
+    int escudoPlata;
+    int escudoOro;
+    int flechaMadera;
+    int flechaPlata;
+    int flechaOro;
+    int manzana;
+    int pocionAzul;
+    int pocionRoja;
 
     public Inventario(){
 
     }
     public Inventario(String username) {
         this.username = username;
-        this.escudoMaderaComprado = 0;
-        this.escudoPlataComprado = 0;
-        this.escudoOroComprado = 0;
-        this.flechaMaderaComprada = 0;
-        this.flechaPlataComprada = 0;
-        this.flechaOroComprada = 0;
-        this.manzanaComprada = 0;
-        this.pocionAzulComprada = 0;
-        this.pocionRojaComprada = 0;
+        this.escudoMadera = 0;
+        this.escudoPlata = 0;
+        this.escudoOro = 0;
+        this.flechaMadera = 0;
+        this.flechaPlata = 0;
+        this.flechaOro = 0;
+        this.manzana = 0;
+        this.pocionAzul = 0;
+        this.pocionRoja = 0;
     }
 
     public String getUsername() {
@@ -36,75 +36,75 @@ public class Inventario {
         this.username = username;
     }
 
-    public int getEscudoMaderaComprado() {
-        return escudoMaderaComprado;
+    public int getEscudoMadera() {
+        return escudoMadera;
     }
 
-    public void setEscudoMaderaComprado(int escudoMaderaComprado) {
-        this.escudoMaderaComprado = escudoMaderaComprado;
+    public void setEscudoMadera(int escudoMadera) {
+        this.escudoMadera = escudoMadera;
     }
 
-    public int getEscudoPlataComprado() {
-        return escudoPlataComprado;
+    public int getEscudoPlata() {
+        return escudoPlata;
     }
 
-    public void setEscudoPlataComprado(int escudoPlataComprado) {
-        this.escudoPlataComprado = escudoPlataComprado;
+    public void setEscudoPlata(int escudoPlata) {
+        this.escudoPlata = escudoPlata;
     }
 
-    public int getEscudoOroComprado() {
-        return escudoOroComprado;
+    public int getEscudoOro() {
+        return escudoOro;
     }
 
-    public void setEscudoOroComprado(int escudoOroComprado) {
-        this.escudoOroComprado = escudoOroComprado;
+    public void setEscudoOro(int escudoOro) {
+        this.escudoOro = escudoOro;
     }
 
-    public int getFlechaMaderaComprada() {
-        return flechaMaderaComprada;
+    public int getFlechaMadera() {
+        return flechaMadera;
     }
 
-    public void setFlechaMaderaComprada(int flechaMaderaComprada) {
-        this.flechaMaderaComprada = flechaMaderaComprada;
+    public void setFlechaMadera(int flechaMadera) {
+        this.flechaMadera = flechaMadera;
     }
 
-    public int getFlechaPlataComprada() {
-        return flechaPlataComprada;
+    public int getFlechaPlata() {
+        return flechaPlata;
     }
 
-    public void setFlechaPlataComprada(int flechaPlataComprada) {
-        this.flechaPlataComprada = flechaPlataComprada;
+    public void setFlechaPlata(int flechaPlata) {
+        this.flechaPlata = flechaPlata;
     }
 
-    public int getFlechaOroComprada() {
-        return flechaOroComprada;
+    public int getFlechaOro() {
+        return flechaOro;
     }
 
-    public void setFlechaOroComprada(int flechaOroComprada) {
-        this.flechaOroComprada = flechaOroComprada;
+    public void setFlechaOro(int flechaOro) {
+        this.flechaOro = flechaOro;
     }
 
-    public int getManzanaComprada() {
-        return manzanaComprada;
+    public int getManzana() {
+        return manzana;
     }
 
-    public void setManzanaComprada(int manzanaComprada) {
-        this.manzanaComprada = manzanaComprada;
+    public void setManzana(int manzana) {
+        this.manzana = manzana;
     }
 
-    public int getPocionAzulComprada() {
-        return pocionAzulComprada;
+    public int getPocionAzul() {
+        return pocionAzul;
     }
 
-    public void setPocionAzulComprada(int pocionAzulComprada) {
-        this.pocionAzulComprada = pocionAzulComprada;
+    public void setPocionAzul(int pocionAzul) {
+        this.pocionAzul = pocionAzul;
     }
 
-    public int getPocionRojaComprada() {
-        return pocionRojaComprada;
+    public int getPocionRoja() {
+        return pocionRoja;
     }
 
-    public void setPocionRojaComprada(int pocionRojaComprada) {
-        this.pocionRojaComprada = pocionRojaComprada;
+    public void setPocionRoja(int pocionRoja) {
+        this.pocionRoja = pocionRoja;
     }
 }

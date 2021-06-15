@@ -15,6 +15,7 @@ public interface InventarioDAO {
 
     boolean update(Inventario inventario);
     boolean updateByParameter(Inventario inventario, String parameter, Object value);
+    boolean updateParameterByParameter(String parameter, Object parameterValue, String byParameter, Object byParameterValue);
 
     boolean delete(Inventario inventario);
     boolean deleteByParameter(String parameter, Object value);

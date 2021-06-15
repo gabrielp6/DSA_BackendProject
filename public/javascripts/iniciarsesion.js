@@ -29,7 +29,7 @@ $(document).ready(function(){
                         myStorage.setItem("password",data.password);
                         message = '"Has iniciado sesión"';
                         //window.location.pathname = "/tienda.html";
-                        window.open("tienda.html");
+                        window.open("home_sesioniniciada.html");
 
                        },
                       error: function(error){

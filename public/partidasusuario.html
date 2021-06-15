@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Perfil</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel ="stylesheet" href ="css/estilohome.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+<div class="contenedor"></div>
+
+<form class="formulario">
+    <h4>Introduce el nombre de usuario del jugador que deseas ver sus partidas</h4>
+    <div class="input-contenedor">
+        <div class="caja"><input type="text" placeholder="Nombre de usuario" id="username" required></div>
+    </div>
+    <a href="perfil.html"><input type="submit" value="Ver perfil" class="button" id="btnVerPerfil"></a>
+</form>
+
+<div class="contenedor"></div>
+
+<h3>Partidas:</h3>
+
+
+<div class="container">
+        <style>
+table, th, td {
+  border: 3px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+}
+</style>
+        <table class="table-striped" style="width:100%">
+    <tr>
+        <td align="center" style="font-size:150%"><strong>Enemigos matados</strong></td>
+        <td align="center" style="font-size:150%"><strong>Monedas recogidas</strong></td>
+        <td align="center" style="font-size:150%"><strong>Vida</strong></td>
+        <td align="center" style="font-size:150%"><strong>Puntuación final</strong></td>
+    </tr>
+
+    <tr>
+        <td>Celda 4</td>
+        <td>Celda 5</td>
+        <td>Celda 6</td>
+        <td>Celda 7</td>
+    </tr>
+
+</table>
+</div>
+
+</body>
+</html>

@@ -47,6 +47,11 @@ public class InventarioImplDAO implements InventarioDAO{
     }
 
     @Override
+    public boolean updateParameterByParameter(String parameter, Object parameterValue, String byParameter, Object byParameterValue) {
+        return session.updateParameterByParameter(Inventario.class, parameter, parameterValue, byParameter, byParameterValue);
+    }
+
+    @Override
     public boolean delete(Inventario inventario) {
         return session.delete(inventario);
     }
