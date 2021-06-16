@@ -24,7 +24,6 @@ public class SessionImpl implements Session {
 
         String insertQuery = QueryHelper.createQueryINSERT(entity);
         System.out.println("Insert Query" + insertQuery);
-        //INSERT INTO USUARIO (username, password, email, coins) VALUES (?,?,?,?)
         PreparedStatement pstm = null;
 
         try {
@@ -77,10 +76,7 @@ public class SessionImpl implements Session {
 
     }
 
-    public Object get(Class theClass, String pk) {
-        //"SELECT * FROM USUARIO WHERE " + pk + "=?"
-        return null;
-    }
+
 
     public boolean update(Object object) {
         try {
@@ -267,7 +263,7 @@ public class SessionImpl implements Session {
         }
     }
 
-    public HashMap<Integer, Object> readAll(Class theClass) {           //obtener todos (aplicable a todas las funciones)
+    public HashMap<Integer, Object> readAll(Class theClass) {
 
         try {
             HashMap<Integer, Object> result = new HashMap<>();
@@ -304,7 +300,6 @@ public class SessionImpl implements Session {
 
 
     public HashMap<Integer, Object> readAllByParameter(Class theClass, String byParameter, Object byParameterValue) {
-        //obtener todos los que cumplan una cierta condición (aplicable a todas las clases)
 
         try {
 

@@ -78,7 +78,7 @@ public class EstadisticasService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPartidas() {
 
-        List<Partida> listaPartidas = partidaDAO.getAllPartida();
+        List<Partida> listaPartidas = partidaDAO.readAll();
 
         GenericEntity<List<Partida>> entity = new GenericEntity<List<Partida>>(listaPartidas) {};
         return Response.status(200).entity(entity).build();
@@ -96,9 +96,7 @@ public class EstadisticasService {
     @Path("/partidasUsuario/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPartidasUsuario(@PathParam("username") String username) {
-        System.out.println("Entra");
         if (usuarioDAO.exists(username)) {
-            System.out.println("existe");
             List<Partida> listaPartidasUsuario = null;
             try {
                 listaPartidasUsuario = partidaDAO.readAllByParameter("username", username);
@@ -106,7 +104,6 @@ public class EstadisticasService {
             catch (Throwable t) {
                 t.printStackTrace();
             }
-            System.out.println("abans de serialitzar");
             GenericEntity<List<Partida>> entity = new GenericEntity<List<Partida>>(listaPartidasUsuario) {};
             return Response.status(200).entity(entity).build();
 
@@ -149,7 +146,7 @@ public class EstadisticasService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecords() {
 
-        List<RecordUsuario> listaRecords = recordDAO.getAll();
+        List<RecordUsuario> listaRecords = recordDAO.readAll();
 
         if (listaRecords == null) {
             return Response.status(404).build();

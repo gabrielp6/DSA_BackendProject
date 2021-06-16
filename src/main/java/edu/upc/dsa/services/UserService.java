@@ -49,7 +49,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsuarios() {
 
-        List<Usuario> listaUsuarios = usuarioDAO.getAll();
+        List<Usuario> listaUsuarios = usuarioDAO.readAll();
 
         GenericEntity<List<Usuario>> entity = new GenericEntity<List<Usuario>>(listaUsuarios) {};
         return Response.status(200).entity(entity).build();

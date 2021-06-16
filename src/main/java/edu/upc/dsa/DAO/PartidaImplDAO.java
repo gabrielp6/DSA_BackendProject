@@ -34,76 +34,57 @@ public class PartidaImplDAO implements PartidaDAO {
 
     @Override
     public List<Partida> readAll() {
-        Session session;
-        List<Partida> listaPartidas;
+        Session session = null;
+        List<Partida> listaPartida = null;
 
-        HashMap<Integer, Object> result;
 
-        session = FactorySession.openSession();
-        result = session.readAll(Partida.class);
-
-        listaPartidas = new ArrayList<>();
-
-        for (Object object : result.values()) {
-            listaPartidas.add((Partida) object);
+        try{
+            List<String> params= new LinkedList<>();
+            String query = "SELECT * FROM Partida;";
+            session = FactorySession.openSession();
+            //String query = "SELECT * FROM objetos";
+            listaPartida = (List) session.queryObjects(query, Partida.class, params);
         }
+        catch(Exception e) {
+            e.printStackTrace();
 
-        session.close();
-
-        return listaPartidas;
+        }
+        finally {
+            if(session!=null){
+                session.close();
+            }
+        }
+        return listaPartida;
     }
 
     @Override
     public List<Partida> readAllByParameter(String parameter, Object value) {
-        Session session;
-        List<Partida> listaPartidas;
+        Session session = null;
+        List<Partida> listaPartida = null;
 
-        HashMap<Integer, Object> result;
 
-        session = FactorySession.openSession();
-        //por ejemplo para obtener todas las de un usuario con su nombre de usuario
-        result = session.readAllByParameter(Partida.class, parameter, value);
-
-        listaPartidas = new ArrayList<>();
-
-        for (Object object : result.values()) {
-            listaPartidas.add((Partida) object);
+        try{
+            List<String> params= new LinkedList<>();
+            String query = "SELECT * FROM Partida WHERE username= '"+ value +"'";
+            session = FactorySession.openSession();
+            //String query = "SELECT * FROM objetos";
+            listaPartida = (List) session.queryObjects(query, Partida.class, params);
         }
+        catch(Exception e) {
+            e.printStackTrace();
 
-        session.close();
-        return listaPartidas;
+        }
+        finally {
+            if(session!=null){
+                session.close();
+            }
+        }
+        return listaPartida;
     }
 
     @Override
     public Partida readByParameter(String parameter, Object value) {
         return ((Partida) session.readByParameter(Partida.class, parameter, value));
-    }
-
-    @Override
-    public List<Partida> getAllPartida() {
-
-            Session session = null;
-            List<Partida> listaPartida = null;
-
-
-            try{
-                List<String> params= new LinkedList<>();
-                String query = "SELECT * FROM Partida;";
-                session = FactorySession.openSession();
-                //String query = "SELECT * FROM objetos";
-                listaPartida = (List) session.queryObjects(query, Partida.class, params);
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-
-            }
-            finally {
-                if(session!=null){
-                    session.close();
-                }
-            }
-            return listaPartida;
-
     }
 
     @Override

@@ -10,7 +10,6 @@ public interface RecordUsuarioDAO {
     boolean create(RecordUsuario record);
 
     List<RecordUsuario> readAll();
-    List<RecordUsuario> getAll();
     RecordUsuario readByParameter(String parameter, Object value);
 
     boolean update(RecordUsuario record);

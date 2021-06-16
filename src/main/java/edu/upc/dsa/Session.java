@@ -11,7 +11,6 @@ public interface Session<E> {
     void close();
 
 
-    Object get(Class theClass, String pk);
     Object readByParameter(Class theClass, String byParameter, Object byParameterValue);
     Object readParameterByParameter(Class theClass, String parameter, String byParameter, Object byParameterValue);
 

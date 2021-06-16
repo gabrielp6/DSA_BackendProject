@@ -10,7 +10,6 @@ public interface UsuarioDAO {
     boolean registerUser(Usuario usuario);
 
     List<Usuario> readAll();
-    List<Usuario> getAll();
     Usuario readByParameter(String parameter, Object value);
     Object readParameterByParameter(String parameter, String byParameter, Object value);
     boolean readPassword(String username, String password);

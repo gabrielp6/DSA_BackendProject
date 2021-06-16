@@ -11,7 +11,6 @@ public interface PartidaDAO {
     List<Partida> readAll();
     List<Partida> readAllByParameter(String parameter, Object value);
     Partida readByParameter(String parameter, Object value);
-    List<Partida> getAllPartida();
 
     boolean update(Partida partida);
     boolean updateByParameter(Partida partida, String parameter, Object value);

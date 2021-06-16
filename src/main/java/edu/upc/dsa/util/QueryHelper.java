@@ -10,8 +10,6 @@ public class QueryHelper {
 
         String [] fields = ObjectHelper.getFields(entity);
 
-        //sb.append("ID");
-
         for (String field: fields) {
             sb.append(field+",");
         }

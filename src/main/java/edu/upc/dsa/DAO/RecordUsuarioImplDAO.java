@@ -35,49 +35,29 @@ public class RecordUsuarioImplDAO implements RecordUsuarioDAO {
 
     @Override
     public List<RecordUsuario> readAll() {
-        Session session;
-        List<RecordUsuario> listaRecords = new ArrayList<>();
-
-        HashMap<Integer, Object> result;
-
-        session = FactorySession.openSession();
-        result = session.readAll(Partida.class);
+        Session session = null;
+        List<RecordUsuario> listaRecords = null;
 
 
-        for (Object object : result.values()) {
-            listaRecords.add((RecordUsuario) object);
+        try{
+            List<String> params= new LinkedList<>();
+            String query = "SELECT * FROM RecordUsuario;";
+            session = FactorySession.openSession();
+            //String query = "SELECT * FROM objetos";
+            listaRecords = (List) session.queryObjects(query, RecordUsuario.class, params);
         }
+        catch(Exception e) {
+            e.printStackTrace();
 
-        session.close();
+        }
+        finally {
+            if(session!=null){
+                session.close();
+            }
+        }
         return listaRecords;
     }
 
-    @Override
-    public List<RecordUsuario> getAll() {
-
-            Session session = null;
-            List<RecordUsuario> listaRecords = null;
-
-
-            try{
-                List<String> params= new LinkedList<>();
-                String query = "SELECT * FROM RecordUsuario;";
-                session = FactorySession.openSession();
-                //String query = "SELECT * FROM objetos";
-                listaRecords = (List) session.queryObjects(query, RecordUsuario.class, params);
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-
-            }
-            finally {
-                if(session!=null){
-                    session.close();
-                }
-            }
-            return listaRecords;
-
-    }
 
     @Override
     public RecordUsuario readByParameter(String parameter, Object value) {

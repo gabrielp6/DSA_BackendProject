@@ -41,46 +41,29 @@ public class UsuarioImplDAO implements UsuarioDAO{
 
     @Override
     public List<Usuario> readAll() {
-        List<Usuario> listaUsuarios;
-        HashMap<Integer, Usuario> result;
+        Session session = null;
+        List<Usuario> listaUsuario = null;
+        List<String> params= new LinkedList<>();
 
-        result = session.readAll(Usuario.class);
+        try{
 
-        listaUsuarios = new ArrayList<>();
-
-        for (Usuario usuario : result.values()) {
-            listaUsuarios.add((Usuario) usuario);
+            String query = "SELECT * FROM Usuario;";
+            session = FactorySession.openSession();
+            //String query = "SELECT * FROM objetos";
+            listaUsuario = (List) session.queryObjects(query, Usuario.class, params);
         }
+        catch(Exception e) {
+            e.printStackTrace();
 
-        return listaUsuarios;
+        }
+        finally {
+            if(session!=null){
+                session.close();
+            }
+        }
+        return listaUsuario;
     }
 
-    @Override
-    public List<Usuario> getAll() {
-
-            Session session = null;
-            List<Usuario> listaUsuario = null;
-            List<String> params= new LinkedList<>();
-
-            try{
-
-                String query = "SELECT * FROM Usuario;";
-                session = FactorySession.openSession();
-                //String query = "SELECT * FROM objetos";
-                listaUsuario = (List) session.queryObjects(query, Usuario.class, params);
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-
-            }
-            finally {
-                if(session!=null){
-                    session.close();
-                }
-            }
-            return listaUsuario;
-
-    }
 
     @Override
     public Usuario readByParameter(String parameter, Object value) {
