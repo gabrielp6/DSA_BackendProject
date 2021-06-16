@@ -53,16 +53,17 @@ public class EstadisticasService {
     public Response registrarPartida(CredentialsPartida credentialsPartida) {
 
         Partida partida = new Partida(credentialsPartida.getUsername(), credentialsPartida.getEnemigosMatados(), credentialsPartida.getTiempo(), credentialsPartida.getMonedasRecogidas());
-        if (credentialsPartida.getUsername() == null)
+        if (credentialsPartida.getUsername().isEmpty())
             return Response.status(500).build();
         else {
             partidaDAO.create(partida);
-            /*RecordUsuario recordUsuario = recordDAO.readByParameter("username", partida.getUsername());
+            RecordUsuario recordUsuario = recordDAO.readByParameter("username", partida.getUsername());
             if(partida.getPuntuacionFinal() > recordUsuario.getPuntuacionFinal()){
-                recordDAO.delete(recordUsuario);
-                RecordUsuario nuevoRecord = new RecordUsuario(partida.getUsername(), partida.getEnemigosMatados(), partida.getTiempo(), partida.getMonedasRecogidas(), partida.getPuntuacionFinal());
-                recordDAO.create(nuevoRecord);
-            }*/
+                recordDAO.updateParameterByParameter("enemigosMatados",partida.getEnemigosMatados(),"username",partida.getUsername());
+                recordDAO.updateParameterByParameter("tiempo",partida.getTiempo(),"username",partida.getUsername());
+                recordDAO.updateParameterByParameter("monedasRecogidas",partida.getTiempo(),"username",partida.getUsername());
+                recordDAO.updateParameterByParameter("puntuacionFinal",partida.getPuntuacionFinal(),"username",partida.getUsername());
+            }
             return Response.status(200).entity(partida).build();
             }
     }
@@ -95,11 +96,17 @@ public class EstadisticasService {
     @Path("/partidasUsuario/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPartidasUsuario(@PathParam("username") String username) {
-
+        System.out.println("Entra");
         if (usuarioDAO.exists(username)) {
-
-            List<Partida> listaPartidasUsuario = partidaDAO.readAllByParameter("username", username);
-
+            System.out.println("existe");
+            List<Partida> listaPartidasUsuario = null;
+            try {
+                listaPartidasUsuario = partidaDAO.readAllByParameter("username", username);
+            }
+            catch (Throwable t) {
+                t.printStackTrace();
+            }
+            System.out.println("abans de serialitzar");
             GenericEntity<List<Partida>> entity = new GenericEntity<List<Partida>>(listaPartidasUsuario) {};
             return Response.status(200).entity(entity).build();
 

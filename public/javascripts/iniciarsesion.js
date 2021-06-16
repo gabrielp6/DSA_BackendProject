@@ -29,11 +29,12 @@ $(document).ready(function(){
                         myStorage.setItem("password",data.password);
                         message = '"Has iniciado sesión"';
                         //window.location.pathname = "/tienda.html";
-                        window.open("home_sesioniniciada.html");
+                        //window.open("home_sesioniniciada.html");
+                        window.location.href = "home_sesioniniciada.html";
 
                        },
                       error: function(error){
-                        alert("Error");
+                        alert("Error: Nombre/contraseña mal introducido");
                         message = '"Nombre/contraseña mal introducido"';
 
                        }

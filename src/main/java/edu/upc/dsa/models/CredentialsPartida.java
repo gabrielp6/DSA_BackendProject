@@ -7,6 +7,10 @@ public class CredentialsPartida {
     int tiempo;
     int monedasRecogidas;
 
+    public CredentialsPartida(){
+
+    }
+
     public CredentialsPartida(String username, int enemigosMatados, int tiempo, int monedasRecogidas) {
         this.username = username;
         this.enemigosMatados = enemigosMatados;

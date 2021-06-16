@@ -60,10 +60,10 @@ public class UsuarioImplDAO implements UsuarioDAO{
 
             Session session = null;
             List<Usuario> listaUsuario = null;
-
+            List<String> params= new LinkedList<>();
 
             try{
-                List<String> params= new LinkedList<>();
+
                 String query = "SELECT * FROM Usuario;";
                 session = FactorySession.openSession();
                 //String query = "SELECT * FROM objetos";

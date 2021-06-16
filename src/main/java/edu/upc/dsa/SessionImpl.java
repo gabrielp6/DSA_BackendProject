@@ -326,8 +326,12 @@ public class SessionImpl implements Session {
                     String field = rsmd.getColumnName(i);
                     ObjectHelper.setter(object, field, resultSet.getObject(i));
                 }
+                if(resultSet.getObject(1) instanceof Integer)
                 result.put((int) resultSet.getObject(1), object);
+                else
+                    System.out.println("warning el camp"+ resultSet.getObject(1)+"no es un enter");
                 object = theClass.getDeclaredConstructor().newInstance();
+
             }
 
             return result;

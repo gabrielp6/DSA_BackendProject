@@ -10,7 +10,6 @@ public interface ObjetoDAO {
 
     List<Objeto> readAll();
     Objeto readByParameter(String parameter, Object value);
-    List<Objeto> getAllObject();
 
     boolean exists(String nombre);
 

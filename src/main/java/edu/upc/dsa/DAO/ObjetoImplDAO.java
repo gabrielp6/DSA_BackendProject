@@ -31,34 +31,9 @@ public class ObjetoImplDAO implements ObjetoDAO{
         return session.create(objeto);
     }
 
-    @Override
-    public List<Objeto> readAll() {
-        return null;
-    }
-
-    /*@Override
-    public List<Objeto> readAll() {
-        Session session;
-        List<Objeto> listaObjetos;
-
-        HashMap<Integer, Object> result;
-
-        session = FactorySession.openSession();
-        result = session.readAll(Objeto.class);
-
-        listaObjetos = new ArrayList<>();
-
-        for (Object object : result.values()) {
-            listaObjetos.add((Objeto) object);
-        }
-
-        session.close();
-
-        return listaObjetos;
-    }*/
 
     @Override
-    public List<Objeto> getAllObject() {
+    public List<Objeto> readAll() {
         Session session = null;
         List<Objeto> objetosList = null;
 

@@ -3,6 +3,7 @@ import edu.upc.dsa.DAO.*;
 import edu.upc.dsa.GameManagerImpl;
 
 import edu.upc.dsa.InventarioManagerImpl;
+import edu.upc.dsa.models.CredentialsCompra;
 import edu.upc.dsa.models.Inventario;
 import edu.upc.dsa.models.Objeto;
 import edu.upc.dsa.models.Usuario;
@@ -43,7 +44,7 @@ public class TiendaService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllObjetos() {
 
-        List<Objeto> listaObjetos = objetoDAO.getAllObject();
+        List<Objeto> listaObjetos = objetoDAO.readAll();
         GenericEntity<List<Objeto>> entity = new GenericEntity<List<Objeto>>(listaObjetos) {};
         return Response.status(200).entity(entity).build();
 
@@ -55,67 +56,71 @@ public class TiendaService {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful"),
             @ApiResponse(code = 402, message = "No tienes suficiente dinero"),
-            @ApiResponse(code = 404, message = "Not found"),
+            @ApiResponse(code = 404, message = "User not found"),
+            @ApiResponse(code = 405, message = "Objeto not found")
     })
-    @Path("/comprarObjeto/{nombre}")
+    @Path("/comprarObjeto")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response comprarObjeto(@PathParam("nombre") String nombre, @QueryParam("username") String username){
+    public Response comprarObjeto(CredentialsCompra credentialsCompra){
 
-        if(objetoDAO.exists(nombre)) {
+        String nombre = credentialsCompra.getNombreObjeto();
+        String username = credentialsCompra.getUsername();
 
-            Objeto objeto = objetoDAO.readByParameter("nombre", nombre);
-            Usuario usuario = usuarioDAO.readByParameter("username", username);
-            Inventario inventario = inventarioDAO.readByParameter("username", username);
+        if (usuarioDAO.exists(username)) {
+            if (objetoDAO.exists(nombre)) {
+                Objeto objeto = objetoDAO.readByParameter("nombre", nombre);
+                Usuario usuario = usuarioDAO.readByParameter("username", username);
+                Inventario inventario = inventarioDAO.readByParameter("username", username);
 
-            if(objeto.getCoste() > usuario.getCoins()){
-                return Response.status(402).build();
+                if (objeto.getCoste() > usuario.getCoins()) {
+                    return Response.status(402).build();
+                } else {
+                    int suma = 0;
+                    if (nombre.equals("escudoOro")) {
+                        suma = inventario.getEscudoOro() + 1;
+                        usuarioDAO.updateParameterByParameter("vida", usuario.getVida() + 50, "username", username);
+                    }
+                    if (nombre.equals("escudoPlata")) {
+                        suma = inventario.getEscudoPlata() + 1;
+                        usuarioDAO.updateParameterByParameter("vida", usuario.getVida() + 20, "username", username);
+                    }
+                    if (nombre.equals("escudoMadera")) {
+                        suma = inventario.getEscudoMadera() + 1;
+                        usuarioDAO.updateParameterByParameter("vida", usuario.getVida() + 10, "username", username);
+                    }
+                    if (nombre.equals("flechaOro")) {
+                        suma = inventario.getFlechaOro() + 1;
+                        usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza() + 5, "username", username);
+                    }
+                    if (nombre.equals("flechaPlata")) {
+                        suma = inventario.getFlechaPlata() + 1;
+                        usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza() + 3, "username", username);
+                    }
+                    if (nombre.equals("flechaMadera")) {
+                        suma = inventario.getFlechaMadera() + 1;
+                        usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza() + 1, "username", username);
+                    }
+                    if (nombre.equals("manzana")) {
+                        suma = inventario.getManzana() + 1;
+                    }
+                    if (nombre.equals("pocionRoja")) {
+                        suma = inventario.getPocionRoja() + 1;
+                    }
+                    if (nombre.equals("pocionAzul")) {
+                        suma = inventario.getPocionAzul() + 1;
+                    }
+
+                    inventarioDAO.updateParameterByParameter(nombre, suma, "username", username);
+                    int monedasActualizadas = usuario.getCoins() - objeto.getCoste();
+                    usuarioDAO.updateParameterByParameter("coins", monedasActualizadas, "username", username);
+                    return Response.status(200).build();
+                }
+            } else {
+                return Response.status(405).build();
             }
-            else{
-                int suma=0;
-                if(nombre == "escudoOro") {
-                    suma = inventario.getEscudoOro() + 1;
-                    usuarioDAO.updateParameterByParameter("vida", usuario.getVida()+50, "username", username);
-                }
-                if(nombre == "escudoPlata") {
-                    suma = inventario.getEscudoPlata() + 1;
-                    usuarioDAO.updateParameterByParameter("vida", usuario.getVida()+20, "username", username);
-                }
-                if(nombre == "escudoMadera") {
-                    suma = inventario.getEscudoMadera() + 1;
-                    usuarioDAO.updateParameterByParameter("vida", usuario.getVida()+10, "username", username);
-                }
-                if(nombre == "flechaOro") {
-                    suma = inventario.getFlechaOro() + 1;
-                    usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza()+5, "username", username);
-                }
-                if(nombre == "flechaPlata") {
-                    suma = inventario.getFlechaPlata() + 1;
-                    usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza()+3, "username", username);
-                }
-                if(nombre == "flechaMadera") {
-                    suma = inventario.getFlechaMadera() + 1;
-                    usuarioDAO.updateParameterByParameter("fuerza", usuario.getFuerza()+1, "username", username);
-                }
-                if(nombre == "manzana") {
-                    suma = inventario.getManzana() + 1;
-                }
-                if(nombre == "pocionRoja") {
-                    suma = inventario.getPocionRoja() + 1;
-                }
-                if(nombre == "pocionAzul") {
-                    suma = inventario.getPocionAzul() + 1;
-                }
-
-                inventarioDAO.updateParameterByParameter(nombre, suma,"username", username);
-                int monedasActualizadas = usuario.getCoins()-objeto.getCoste();
-                usuarioDAO.updateParameterByParameter("coins", monedasActualizadas, "username", username);
-                return Response.status(200).build();
-            }
-            }
-
-        else{
-            return Response.status(404).build();
         }
+        else
+            return Response.status(404).build();
         }
 
 

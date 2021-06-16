@@ -23,7 +23,8 @@ $(document).ready(function(){
                     success: function (data) {
                     alert("Usuario registrado correctamente!");
                     console.log("Registrado");
-                    window.open("iniciarsesion.html");
+                    //window.open("iniciarsesion.html");
+                    window.location.href = "iniciarsesion.html";
 
                     },
                     error: function(error){
