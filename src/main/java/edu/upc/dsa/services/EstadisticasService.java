@@ -57,6 +57,11 @@ public class EstadisticasService {
             return Response.status(500).build();
         else {
             partidaDAO.create(partida);
+
+            Usuario usuario = usuarioDAO.readByParameter("username", credentialsPartida.getUsername());
+            int sumarMonedas = credentialsPartida.getMonedasRecogidas() + usuario.getCoins();
+            usuarioDAO.updateParameterByParameter("coins", sumarMonedas,"username",credentialsPartida.getUsername());
+
             RecordUsuario recordUsuario = recordDAO.readByParameter("username", partida.getUsername());
             if(partida.getPuntuacionFinal() > recordUsuario.getPuntuacionFinal()){
                 recordDAO.updateParameterByParameter("enemigosMatados",partida.getEnemigosMatados(),"username",partida.getUsername());

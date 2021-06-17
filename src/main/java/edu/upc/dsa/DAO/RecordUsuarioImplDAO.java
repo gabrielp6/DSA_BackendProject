@@ -41,7 +41,7 @@ public class RecordUsuarioImplDAO implements RecordUsuarioDAO {
 
         try{
             List<String> params= new LinkedList<>();
-            String query = "SELECT * FROM RecordUsuario;";
+            String query = "SELECT * FROM RecordUsuario ORDER BY puntuacionFinal DESC;";
             session = FactorySession.openSession();
             //String query = "SELECT * FROM objetos";
             listaRecords = (List) session.queryObjects(query, RecordUsuario.class, params);
