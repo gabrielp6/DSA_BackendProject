@@ -3,10 +3,7 @@ import edu.upc.dsa.DAO.*;
 import edu.upc.dsa.GameManagerImpl;
 
 import edu.upc.dsa.InventarioManagerImpl;
-import edu.upc.dsa.models.CredentialsCompra;
-import edu.upc.dsa.models.Inventario;
-import edu.upc.dsa.models.Objeto;
-import edu.upc.dsa.models.Usuario;
+import edu.upc.dsa.models.*;
 import io.swagger.annotations.*;
 
 import javax.ws.rs.*;
@@ -63,6 +60,8 @@ public class TiendaService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response comprarObjeto(CredentialsCompra credentialsCompra){
 
+        CompraRespuesta compraRespuesta = new CompraRespuesta();
+
         String nombre = credentialsCompra.getNombreObjeto();
         String username = credentialsCompra.getUsername();
 
@@ -112,8 +111,9 @@ public class TiendaService {
 
                     inventarioDAO.updateParameterByParameter(nombre, suma, "username", username);
                     int monedasActualizadas = usuario.getCoins() - objeto.getCoste();
+                    compraRespuesta.setMonedasActualizadas(monedasActualizadas);
                     usuarioDAO.updateParameterByParameter("coins", monedasActualizadas, "username", username);
-                    return Response.status(200).build();
+                    return Response.status(200).entity(compraRespuesta).build();
                 }
             } else {
                 return Response.status(405).build();
