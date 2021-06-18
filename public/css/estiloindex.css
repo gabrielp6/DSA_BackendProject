@@ -37,3 +37,28 @@ h3{
     color: #000000;
     font-size: 30px;
 }
+
+h4{
+    text-align: center;
+    color: #000000;
+    font-size: 25px;
+}
+
+
+.img {
+    transform: translateX(-10%);
+    transform: translateY(20%);
+    display:block;
+    margin:auto;
+    width:625px;
+    height:375px;
+}
+
+
+.contenedor2{
+    margin:auto;
+    background-color: #996633;
+    width: 50%;
+    padding: 5px;
+
+}

@@ -1,8 +1,10 @@
 var BASE_URI = "http://localhost:8080/dsaApp"
 
-$(document).ready(function() {
+$(document).ready(function(e) {
 
-    $('#btnVerPerfil').click(function () {
+
+    $('#btnVerPerfil').click(function (e) {
+    e.preventDefault(e);
         var usuario = $('#username').val();
         $.ajax({
             url: BASE_URI.concat("/user/obtenerUsuario/"+usuario),

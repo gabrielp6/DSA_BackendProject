@@ -4,6 +4,7 @@ $(document).ready(function(e) {
 
     $('#btnResultados').click(function (e) {
 
+    e.preventDefault();
         $.ajax({
             url: BASE_URI.concat("/estadisticas/records"),
                 success: function(data) {
@@ -67,6 +68,10 @@ $(document).ready(function(e) {
                     $("#tiempo10").text(data[9].tiempo);
                     $("#monedasRecogidas10").text(data[9].monedasRecogidas);
                     $("#puntuacionFinal10").text(data[9].puntuacionFinal);
+
+                    $("#campeon2").text(data[1].username);
+                    $("#campeon1").text(data[0].username);
+                    $("#campeon3").text(data[2].username);
                 }
 
         })

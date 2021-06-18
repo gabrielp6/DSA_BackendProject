@@ -26,6 +26,32 @@ body {
     padding: 25px;
 }
 
+.contenedor1{
+    margin:auto;
+    background-color: #0066FF;
+    width: 60%;
+    padding: 25px;
+}
+.contenedor2{
+    margin:auto;
+    background-color: #00CC00;
+    width: 60%;
+    padding: 25px;
+}
+.contenedor3{
+    margin:auto;
+    background-color: #FF6600;
+    width: 60%;
+    padding: 25px;
+}
+.contenedor4{
+    margin:auto;
+    background-color: #FFFF33;
+    width: 60%;
+    padding: 25px;
+}
+
+
 h1{
     text-align: center;
     color: #000000;
@@ -70,12 +96,22 @@ border: 2px solid #5878ca;
     }
 }
 
+@media(min-width:768px)
+{
+    .formulario2{
+        background-color: #0066FF;
+        margin: auto;
+        width: 500px;
+        border-radius: 2%;
+    }
+}
+
 .formulario{
     margin-top: 60px;
 }
 
 h5{
-    transform: translateX(20%);
+    text-align: center;
     color: #000000;
     font-size: 25px;
 }
@@ -99,7 +135,14 @@ background: #99ffcc;
     margin-bottom: 15px;
     display:block;
     margin:auto;
-    width:200px;
-    height:200px;
+    width:120px;
+    height:120px;
     border-radius:150px;
+}
+
+.medalla {
+    display:block;
+    margin:auto;
+    width:100px;
+    height:100px;
 }
