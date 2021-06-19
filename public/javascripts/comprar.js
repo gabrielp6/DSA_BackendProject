@@ -15,13 +15,17 @@ $('#buttonEscudoOro').click(function () {
                     data: JSON.stringify({"nombreObjeto": "escudoOro", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Escudo de oro comprado!");
+
+                       success: function (data) {
+                                alert("Escudo de oro comprado! Te quedan "+data.monedasActualizadas+" monedas");
                                 message = '"Escudo de oro comprado"';
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
+
             });
 });
 
@@ -37,13 +41,14 @@ $('#buttonEscudoPlata').click(function () {
                     data: JSON.stringify({"nombreObjeto": "escudoPlata", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Escudo de plata comprado!");
-                                message = '"Escudo de plata comprado"';
+                       success: function (data) {
+                                alert("Escudo de plata comprado! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 
@@ -60,13 +65,14 @@ $('#buttonEscudoMadera').click(function () {
                     data: JSON.stringify({"nombreObjeto": "escudoMadera", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Escudo de madera comprado!");
-                                message = '"Escudo de madera comprado"';
+                       success: function (data) {
+                                alert("Escudo de madera comprado! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 
@@ -82,13 +88,14 @@ $('#buttonFlechaOro').click(function () {
                     data: JSON.stringify({"nombreObjeto": "flechaOro", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Flecha de oro comprada!");
-                                message = '"Flecha de oro comprada"';
+                       success: function (data) {
+                                alert("Flecha de oro comprada! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 
@@ -105,13 +112,14 @@ $('#buttonFlechaPlata').click(function () {
                     data: JSON.stringify({"nombreObjeto": "flechaPlata", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Flecha de plata comprada!");
-                                message = '"Flecha de plata comprada"';
+                       success: function (data) {
+                                alert("Flecha de plata comprada! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 
@@ -128,13 +136,14 @@ $('#buttonFlechaMadera').click(function () {
                     data: JSON.stringify({"nombreObjeto": "flechaMadera", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Flecha de madera comprada!");
-                                message = '"Flecha de madera comprada"';
+                       success: function (data) {
+                                alert("Flecha de madera comprada! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 
@@ -150,13 +159,14 @@ $('#buttonManzana').click(function () {
                     data: JSON.stringify({"nombreObjeto": "manzana", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Manzana comprada!");
-                                message = '"Manzana comprada"';
+                       success: function (data) {
+                                alert("Manzana comprada! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 
@@ -173,13 +183,14 @@ $('#buttonPocionRoja').click(function () {
                     data: JSON.stringify({"nombreObjeto": "pocionRoja", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Pocion roja comprada!");
-                                message = '"Pocion roja comprado"';
+                       success: function (data) {
+                                alert("Pocion roja comprada! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 
@@ -195,13 +206,14 @@ $('#buttonPocionAzul').click(function () {
                     data: JSON.stringify({"nombreObjeto": "pocionAzul", "username": username}),
                     dataType:'json',
 
-                    statusCode: {
-                        200: function() {
-                                alert("Pocion azul comprada!");
-                                message = '"Pocion azul comprado"';
+                       success: function (data) {
+                                alert("Pocion azul comprada! Te quedan "+data.monedasActualizadas+" monedas");
                                 window.location.href = "tienda.html";
-                        }
-                    }
+                        },
+
+                       error: function(error){
+                       alert("No tienes suficiente dinero");
+                       }
             });
 });
 

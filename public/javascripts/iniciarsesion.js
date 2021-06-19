@@ -8,10 +8,8 @@ $(document).ready(function(){
        e.preventDefault();
        var username = $('#username').val();
        var password = $('#password').val();
-       console.log("hola");
        if (username == null || password == null){
            alert("Hay campos vacios!");
-           message = '"Campos vacios"';
 
        }
        else {
@@ -29,17 +27,11 @@ $(document).ready(function(){
                         alert("Sesión iniciada correctamente");
                         myStorage.setItem("username",data.username);
                         myStorage.setItem("password",data.password);
-                        console.log("llega");
-                        console.log(username);
-                        message = '"Has iniciado sesión"';
-                        //window.location.pathname = "/tienda.html";
-                        //window.open("home_sesioniniciada.html");
                         window.location.href = "home_sesioniniciada.html";
 
                        },
                       error: function(error){
                         alert("Error: Nombre/contraseña mal introducido");
-                        message = '"Nombre/contraseña mal introducido"';
 
                        }
                       })

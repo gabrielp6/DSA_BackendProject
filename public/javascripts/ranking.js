@@ -8,7 +8,6 @@ $(document).ready(function(e) {
         $.ajax({
             url: BASE_URI.concat("/estadisticas/records"),
                 success: function(data) {
-                    alert("recibido");
                     $("#nombre1").text(data[0].username);
                     $("#enemigosMatados1").text(data[0].enemigosMatados);
                     $("#tiempo1").text(data[0].tiempo);
