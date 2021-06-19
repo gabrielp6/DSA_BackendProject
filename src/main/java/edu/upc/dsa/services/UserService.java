@@ -63,14 +63,19 @@ public class UserService {
             @ApiResponse(code = 200, message = "Successful"),
             @ApiResponse(code = 404, message = "Usuarrio Not Found")
     })
-    @Path("/borrarUsuario/{username}")
+    @Path("/borrarUsuario/{username}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response borrarUsuario(@PathParam("username") String username) {
+    public Response borrarUsuario(@PathParam("username") String username, @PathParam("password") String password) {
 
+        Usuario usuario = usuarioDAO.readByParameter("username", username);
 
         if (usuarioDAO.exists(username)) {
-            usuarioDAO.deleteByParameter("username", username);
-            return Response.status(200).build();
+            if(password.equals(usuario.getPassword())) {
+                usuarioDAO.deleteByParameter("username", username);
+                return Response.status(200).build();
+            }
+            else
+                return Response.status(404).build();
         }
 
         else {

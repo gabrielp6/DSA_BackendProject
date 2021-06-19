@@ -90,6 +90,18 @@ p{
     }
 }
 
+@media(min-width:768px)
+{
+    .formulario2{
+        background-color: #FF6666;
+        margin: auto;
+        width: 500px;
+        margin-top: 70px;
+        border-radius: 2%;
+        padding: 10px;
+    }
+}
+
 
 
 

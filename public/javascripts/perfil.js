@@ -2,7 +2,6 @@ var BASE_URI = "http://localhost:8080/dsaApp"
 
 $(document).ready(function(e) {
 
-
     $('#btnVerPerfil').click(function (e) {
     e.preventDefault(e);
         var usuario = $('#username').val();
