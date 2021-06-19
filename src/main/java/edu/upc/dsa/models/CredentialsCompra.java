@@ -4,6 +4,7 @@ public class CredentialsCompra {
 
     String nombreObjeto;
     String username;
+    int monedasActualizadas;
 
     public CredentialsCompra() {
     }
@@ -27,5 +28,13 @@ public class CredentialsCompra {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getMonedasActualizadas() {
+        return monedasActualizadas;
+    }
+
+    public void setMonedasActualizadas(int monedasActualizadas) {
+        this.monedasActualizadas = monedasActualizadas;
     }
 }

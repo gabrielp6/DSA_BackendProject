@@ -60,10 +60,9 @@ public class TiendaService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response comprarObjeto(CredentialsCompra credentialsCompra){
 
-        CompraRespuesta compraRespuesta = new CompraRespuesta();
-
         String nombre = credentialsCompra.getNombreObjeto();
         String username = credentialsCompra.getUsername();
+        int monedasRestantes = credentialsCompra.getMonedasActualizadas();
 
         if (usuarioDAO.exists(username)) {
             if (objetoDAO.exists(nombre)) {
@@ -110,10 +109,10 @@ public class TiendaService {
                     }
 
                     inventarioDAO.updateParameterByParameter(nombre, suma, "username", username);
-                    int monedasActualizadas = usuario.getCoins() - objeto.getCoste();
-                    compraRespuesta.setMonedasActualizadas(monedasActualizadas);
-                    usuarioDAO.updateParameterByParameter("coins", monedasActualizadas, "username", username);
-                    return Response.status(200).entity(compraRespuesta).build();
+                    monedasRestantes = usuario.getCoins() - objeto.getCoste();
+                    credentialsCompra.setMonedasActualizadas(monedasRestantes);
+                    usuarioDAO.updateParameterByParameter("coins", monedasRestantes, "username", username);
+                    return Response.status(200).entity(credentialsCompra).build();
                 }
             } else {
                 return Response.status(405).build();
