@@ -32,7 +32,7 @@ $(document).ready(function(e) {
                     $("#monedasRecogidas4").text(data[3].monedasRecogidas);
                     $("#puntuacionFinal4").text(data[3].puntuacionFinal);
 
-                    $("#nombre5").text(data[1].username);
+                    $("#nombre5").text(data[4].username);
                     $("#enemigosMatados5").text(data[4].enemigosMatados);
                     $("#tiempo5").text(data[4].tiempo);
                     $("#monedasRecogidas5").text(data[4].monedasRecogidas);
@@ -44,25 +44,25 @@ $(document).ready(function(e) {
                     $("#monedasRecogidas6").text(data[5].monedasRecogidas);
                     $("#puntuacionFinal6").text(data[5].puntuacionFinal);
 
-                    $("#nombre7").text(data[1].username);
+                    $("#nombre7").text(data[6].username);
                     $("#enemigosMatados7").text(data[6].enemigosMatados);
                     $("#tiempo7").text(data[6].tiempo);
                     $("#monedasRecogidas7").text(data[6].monedasRecogidas);
                     $("#puntuacionFinal7").text(data[6].puntuacionFinal);
 
-                    $("#nombre8").text(data[1].username);
+                    $("#nombre8").text(data[7].username);
                     $("#enemigosMatados8").text(data[7].enemigosMatados);
                     $("#tiempo8").text(data[7].tiempo);
                     $("#monedasRecogidas8").text(data[7].monedasRecogidas);
                     $("#puntuacionFinal8").text(data[7].puntuacionFinal);
 
-                    $("#nombre9").text(data[1].username);
+                    $("#nombre9").text(data[8].username);
                     $("#enemigosMatados9").text(data[8].enemigosMatados);
                     $("#tiempo9").text(data[8].tiempo);
                     $("#monedasRecogidas9").text(data[8].monedasRecogidas);
                     $("#puntuacionFinal9").text(data[8].puntuacionFinal);
 
-                    $("#nombre10").text(data[1].username);
+                    $("#nombre10").text(data[9].username);
                     $("#enemigosMatados10").text(data[9].enemigosMatados);
                     $("#tiempo10").text(data[9].tiempo);
                     $("#monedasRecogidas10").text(data[9].monedasRecogidas);

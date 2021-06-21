@@ -166,7 +166,7 @@ p3{
 
 .exc-container {
     margin: 10px;
-    padding: 16px 100px;
+    padding: 16px 80px;
     position: relative;
     background-color: gray;
 }
@@ -178,4 +178,33 @@ p3{
 .contenedor{
     width: 100%;
     padding: 15px;
+}
+
+.imagen {
+    display:block;
+    margin:auto;
+    width:400px;
+    height:100px;
+}
+
+.contenedor2 {
+    margin: 10px;
+    padding: 16px 80px;
+    position: relative;
+    background-color: #999999;
+}
+
+.person-container {
+    margin: 15px;
+    padding: 30px 34px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    background-color: #999999;
+}
+
+.imgPers {
+    display:block;
+    margin:auto;
+    width:225px;
+    height:275px;
 }

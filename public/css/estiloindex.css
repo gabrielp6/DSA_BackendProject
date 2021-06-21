@@ -46,8 +46,6 @@ h4{
 
 
 .img {
-    transform: translateX(-10%);
-    transform: translateY(20%);
     display:block;
     margin:auto;
     width:625px;

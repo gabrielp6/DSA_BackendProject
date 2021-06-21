@@ -65,7 +65,7 @@ public class PartidaImplDAO implements PartidaDAO {
 
         try{
             List<String> params= new LinkedList<>();
-            String query = "SELECT * FROM Partida WHERE username= '"+ value +"'";
+            String query = "SELECT * FROM Partida WHERE username= '"+ value +"' ORDER BY puntuacionFinal desc";
             session = FactorySession.openSession();
             //String query = "SELECT * FROM objetos";
             listaPartida = (List) session.queryObjects(query, Partida.class, params);
